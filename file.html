@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+<body>
+    <button id="pickButton">Pick File</button>
+
+    <script type="text/javascript" src="https://api.filepicker.io/v1/filepicker.js"></script>
+    <script type="text/javascript">
+    window.onload = function () {
+        filepicker.setKey("ASzv4BybRQn2H9YsUQsniz");
+        document.getElementById('pickButton').onclick = function(){
+                filepicker.pick(function(FPFile){
+                  alert(FPFile.url);
+                });
+            };
+        };
+    </script>
+    
+    
+    
+</body>
+</html>

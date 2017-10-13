@@ -1,0 +1,137 @@
+#feeds{
+ height: 100%;
+ max-width: 100%;
+ width: 1000px;
+ box-sizing: border-box;
+ margin: auto;
+}
+
+body{ margin-top: 25px; margin-bottom: 25px; }
+#feeds {
+ padding: 30px 40px;
+ padding-top: 0px;
+}
+
+body{background: #eee}
+
+#feeds{
+  background: white;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+     -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+          box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+  }
+
+body  {
+  background:#f6f6f4;
+  }
+#header {
+  margin-left:0px;
+  width:260px;
+  padding-bottom:1px;
+  padding-left:30px;
+  padding-top:7px !important;
+}
+#header h1 {
+  font-family:trebuchet MS, arial, times, helvetica, arial, sans-serif;
+  font-size:33px;
+  color:Green;
+  font-weight:normal;
+}
+
+#header a {
+  color:Green;
+  text-decoration:none;
+}
+#header a:hover  {
+ text-decoration:none;
+  color:Orange;
+}
+
+#content {
+  margin-left:30px;
+  margin-top:0px !important;
+  font-family:verdana, arial, times, helvetica, arial, sans-serif;
+  font-size:12px;
+  color:#404040;
+  text-align:justify;
+  line-height:1.8em !important;
+  line-height:2.2em;
+}
+
+#nav {
+  float:right;
+  margin-top:-43px !important;
+  margin-right:0px;
+  margin-left:270px;
+  font-family:verdana, arial, times, helvetica, arial, sans-serif;
+  font-size:14px;
+  color:#000000;
+  text-align:justify;
+}
+#nav a {
+  color:#101000;
+  text-decoration:none;
+}
+#nav a:hover  {
+  color:Green;
+  text-decoration:900;
+}
+.nav1{
+ float: right;
+ color:Green;
+ font-weight:normal;
+    }
+#content a {
+  color:Black;
+  text-decoration:none;
+}
+#content a:hover  {
+  color:Green;
+}
+#content ul.pubs li 
+{ 
+margin-left: -11px;
+list-style-type: decimal-leading-zero;
+} 
+
+#content ul.programs li 
+{ 
+margin-left: -25px;
+list-style-type: disc;
+} 
+ 
+#content ul.personal li 
+{ 
+margin-left: -25px;
+list-style-type: disc;
+} 
+
+.sub  {
+  font-size:18px;
+  font-weight:normal;
+  padding-left:0px;
+  font-family:trebuchet MS, arial, times, helvetica, arial, sans-serif;
+  color:#000;
+}
+
+#footer {
+  width:581px;
+  color:#000;
+  padding-bottom:10px;
+  padding-top:3px;
+  font-family:verdana, arial, times, helvetica, arial, sans-serif;
+  font-size:12px;
+  margin-bottom:3px;
+  margin-left:15px !important;
+  line-height:1.75em;
+  height:40px;
+  text-align:center;
+}
+#footer a {
+  color:#808080;
+  text-decoration:none;
+}
+#footer a:hover  {
+  text-decoration:underline;
+  color:#000;
+}
