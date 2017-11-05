@@ -1,2 +1,0 @@
-RewriteCond %{HTTP_HOST} ^pubs\.prasad\.tk$ [NC]
-RewriteRule ^(.*) http://prasad.tk/publications.htm/$1 [L,R]
