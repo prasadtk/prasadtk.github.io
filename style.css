@@ -13,7 +13,7 @@ body { margin: 0;
 */
 h1 { font-weight: 300;
      margin: 5px 0 0;
-     font-size: 40px;
+     font-size: 36px;
      color:#000666;
      padding: 0 10px 1px;
      border-radius:2px;
@@ -43,8 +43,8 @@ a { color: #000666;
     margin-right:-2px;
 }
 a:hover {
-  background-color:#000111;
-  color:#ffffff;
+  background-color:#CDEF12;
+  color:#000;
 }
 .key:first-child { margin-left: 0 }
 .key { margin: 0 10px;
@@ -72,11 +72,17 @@ a:hover {
 .contact-info { font-size: 16px;
                 text-align: right;
 }
-.light { color: #aaa;letter-spacing:1px;
+.light { color: #444;letter-spacing:1px;
          font-size: 14px;
          line-height:28px;
          font-family: 'Source Sans Pro', sans-serif;
          text-transform:uppercase;
+}
+.light1 { color: #ccc;letter-spacing:1px;
+         font-size: 10px;
+         line-height:2px;
+         font-family: 'Source Sans Pro', sans-serif;
+         text-transform:none;
 }
 ul{
   padding-left:15px;
