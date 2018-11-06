@@ -179,3 +179,27 @@ ul.skills li:last-child{
     ul.skills li{ font-size: 9pt; margin-bottom:0}
 
 }
+
+#expend {
+  display:none;  
+}
+
+#expend + .smalldesc {
+  max-height:52px;
+  overflow:hidden;
+  transition:all .3s ease;
+}
+
+#expend:checked + .smalldesc {
+  max-height:250px;  
+}
+
+label {
+  color:blue;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+label:hover {
+  text-decoration:none;  
+}
