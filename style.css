@@ -130,7 +130,7 @@ ul.skills li:last-child{
            height: 297mm;
 }
 
-@page { size: A4;
+@page { size: auto;
         margin: 0;
 }
 
