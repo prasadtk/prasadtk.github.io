@@ -130,9 +130,6 @@ ul.skills li:last-child{
            height: 297mm;
 }
 
-@page { size: 9in 12in; 
-        margin: 0;
-}
 
 @media print {
     .page { margin: 0;
