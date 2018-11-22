@@ -6,7 +6,13 @@
     <meta name="copyright" content="Copyright  2018 PRASAD. Some Rights Reserved." />
     <meta name="author" content="Prasad" />
     <meta name="language" content="English" />
-    
+    <script>
+     function showhide(id) {
+       	var e = document.getElementById(id);
+       	e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+     }
+     
+</script>
   
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -269,15 +275,17 @@
  
 
 
-
-       
-        <!-- Publications -->
+       <!-- Publications -->
         <div class="section row">
             <h2 class="col">Publications</h2>
             <div class="section-text col-right">
                 <div class="desc">
-                
-                    
+<ul>    <li>	<a href="javascript:showhide('uniquename')"> Click to show </a></li>  </ul>          	
+    		
+
+    	<div id="uniquename" style="display:none;">
+
+                  
                     <!-- Start -->
                     <ul>
                         <li>T. K. Prasad, M. P. Suh, Metal-Organic Frameworks Incorporating Various Alkoxy Pendant Groups: Hollow Tubular Morphologies, X-ray Single-Crystal Structures, and Selective Carbon Dioxide Adsorption Properties. &nbsp;<a href="http://dx.doi.org/10.1002/asia.201500332" target="blank"><i>Chem. As. J.</i> <b>2015</b>, <i>10</i> 2257-2263. </a>
@@ -330,12 +338,18 @@
                         </li>
 
                     </ul>
+    	</div>
+    	
+    	
+
 
  
                 </div>
             </div>
         </div>
     
+
+   
     
 
     
