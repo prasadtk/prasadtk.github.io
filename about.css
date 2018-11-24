@@ -8,7 +8,7 @@ html, body {
 }
 
 a {
-  color:  #11A9E0;
+  color: #FF4500;
   font-weight: 200;
   text-decoration: none;
   padding-right: 7px;
@@ -40,7 +40,7 @@ header {
   width: 323px;
   height: 10px;
   margin-bottom: 30px;
-  background-color: #ff5733;
+  background-color: #FF4500;
 }
 
 .header-name-container {
@@ -58,7 +58,7 @@ header {
 }
 
 .header-meta {
-  color: #990000;
+  color: #994d00;
   font-size: 40px;
 }
 
@@ -72,7 +72,7 @@ header {
   width: 323px;
   height: 10px;
   margin-bottom: 15px;
-  background-color: #ff5733;
+  background-color: #FF4500;
 }
 
 .header-meta-container {
@@ -81,7 +81,7 @@ header {
 
 .header-meta-name {
   font-weight: 200;
-  color: #990000;
+  color: #994d00;
   font-size: 25px;
 }
 
@@ -108,20 +108,20 @@ header {
 
 .article-heading {
   font-size: 40px;
-  color: #990000;
+  color: #994d00;
   /* border-bottom: 1px solid #990000; */
 }
 
 .article-content {
   font-size: 25px;
   padding-left: 30px;
-  border-left: 1px solid #990000;
+  border-left: 1px solid #994d00;
   line-height: 37px;
 }
 
 .career-container {
   margin-top: 60px;
-  border-left: 1px solid #990000;
+  border-left: 1px solid #994d00;
   padding-left: 30px;
 }
 
@@ -131,7 +131,7 @@ header {
 
 .career-name {
   font-size: 30px;
-  color: #990000;
+  color: #994d00;
 }
 
 .career-job {
@@ -159,12 +159,12 @@ header {
 }
 
 .career-tech-name {
-  color: #990000;
+  color: #994d00;
   font-weight: 300;
 }
 
 .edu-status {
-  color: #990000;
+  color: #994d00;
 }
 
 .project-list-container {
@@ -176,7 +176,7 @@ header {
   font-size: 30px;
   margin-top: 50px;
   margin-bottom: 30px;
-  color: #990000;
+  color: #994d00;
 }
 
 .career-divider {
@@ -196,12 +196,12 @@ header {
   display: block;
   margin-top: 30px;
   margin-bottom: 30px;
-  border-left: 1px solid #990000;
+  border-left: 1px solid #994d00;
   padding-left: 30px;
 }
 
 .project-name {
-  color: #990000;
+  color: #994d00;
   font-size: 25px;
 }
 
@@ -215,7 +215,7 @@ header {
 }
 
 .project-tech-name {
-  color: #990000;
+  color: #994d00;
   font-weight: 200;
   display: block;
   margin-top: 20px;
@@ -227,11 +227,11 @@ header {
   font-size: 20px;
   line-height: 30px;
   /*padding-left: 20px;
-  border-left: 1px solid #990000;*/
+  border-left: 1px solid #994d00;*/
 }
 
 .strong-red {
-  color: #990000;
+  color: #994d00;
 }
 
 .presentation-date {
@@ -251,7 +251,7 @@ header {
 .skillset-category {
   display: block;
   font-size: 30px;
-  color: #990000;
+  color: #994d00;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -273,7 +273,7 @@ header {
 }
 
 .skill-head {
-  color: #990000;
+  color: #994d00;
 }
 
 .skill-bar-container {
@@ -285,11 +285,11 @@ header {
 
 .skill-bar {
   height: 25px;
-  background-color: #990000;
+  background-color: #994d00;
 }
 
 footer {
-  color: #990000;
+  color: #994d00;
   border-top: 1px solid grey;
   padding-top: 30px;
   font-weight: 200;
