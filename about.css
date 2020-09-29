@@ -8,7 +8,7 @@ html, body {
 }
 
 a {
-  color: #FF4500;
+  color: #FF7F4F;
   font-weight: 200;
   text-decoration: none;
   padding-right: 7px;
@@ -40,7 +40,7 @@ header {
   width: 323px;
   height: 10px;
   margin-bottom: 30px;
-  background-color: #FF4500;
+  background-color: #FF7F4F;
 }
 
 .header-name-container {
@@ -72,7 +72,7 @@ header {
   width: 323px;
   height: 10px;
   margin-bottom: 15px;
-  background-color: #FF4500;
+  background-color: #FF7F4F;
 }
 
 .header-meta-container {
