@@ -2,6 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Molarity Calculator</title>
+
 <script language="JavaScript">
 var Demo = false;
 function FormatAnswer(value,unit,ndec){
@@ -138,8 +139,7 @@ function Dilute(form)
 
 
 
-<h2>Molarity Calculator</h2>
-<table width="700" cellspacing="5" cellpadding="5">
+
 
 <NOSCRIPT> 
 <tr><td>
@@ -152,15 +152,12 @@ NOTE:  Because your browser does NOT support JavaScript -- probably because
 
 
  
-  
-<tr>
- <td colspan="5"><hr align="Center" width="650" size="2" color="Pink"></td>
-</tr>
+
 
 
 <form action="" name="mass" id="mass">
 <tr> 
-  <td><h3>Mass from volume & concentration</h3></td>
+ 
  <td>
  Concentration:&nbsp;&nbsp;<input type="Text" name="conc"  size="8" maxlength="19" ONFOCUS="ClearResult(this.form)">
 <select name="units" size="1" ONFOCUS="ClearResult(this.form)">
@@ -187,16 +184,10 @@ Volume:&nbsp;&nbsp;<input type="Text" name="volume" ONFOCUS="ClearResult(this.fo
  </tr>
  </form>
  
- 
-<tr>
- <td colspan="5"><hr align="Center" width="650" size="2" color="Pink"></td>
-</tr>
-
-
 
 <form name="volume" id="volume">
 <tr> 
-  <td><h3>Volume from mass & concentration</h3></td>
+<hr>
   <td>
   Mass:&nbsp;&nbsp;<input type="Text" name="grams" size="8" maxlength="19" ONFOCUS="ClearResult(this.form)">
   	<select name="units" size="1" ONFOCUS="ClearResult(this.form)">
@@ -225,14 +216,10 @@ Volume:&nbsp;&nbsp;<input type="Text" name="volume" ONFOCUS="ClearResult(this.fo
  </form>
  
 
-  
- <tr>
- <td colspan="5"><hr align="Center" width="650" size="2" color="Pink"></td>
-</tr>
 
 <form name="molarity" id="molarity">
 <tr> 
-  <td><h3>Molarity from mass & volume</h3></td>
+<hr>
   <td>
   Mass:&nbsp;&nbsp;<input type="Text" name="grams" size="8" maxlength="19">
   	<select name="units" size="1"  ONFOCUS="ClearResult(this.form)">
@@ -257,15 +244,9 @@ Volume:&nbsp;&nbsp;<input type="Text" name="volume" ONFOCUS="ClearResult(this.fo
  </tr>
  </form>
  
- <tr>
- <td colspan="5"><hr align="Center" width="650" size="2" color="Pink"></td>
-</tr>
- 
 
- 
 <tr> 
-  <td><h3>Dilute a stock solution</h3></td>
- <td> 
+<hr>
  <form>
 
  Stock concentration:&nbsp;&nbsp;<input type="Text" name="StockConc"  size="8" maxlength="19" ONFOCUS="ClearResult(this.form)">
@@ -303,9 +284,9 @@ Desired volume:&nbsp;&nbsp;<input type="Text" name="volume" ONFOCUS="ClearResult
 
  </form>
 				
- <tr>
- <td colspan="5"><hr align="Center" width="650" size="2" color="Pink"></td>
-</tr>
+
+
+
 
  </table>
 </body>
