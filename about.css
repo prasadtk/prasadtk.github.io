@@ -54,7 +54,7 @@ header {
 }
 
 .header-nickname {
-  color: grey;
+  color: #C0C0C0;
 }
 
 .header-meta {
@@ -132,6 +132,10 @@ header {
 .career-name {
   font-size: 30px;
   color: #994d00;
+}
+
+.career-sub {
+  color: #C0C0C0;
 }
 
 .career-job {
