@@ -3,8 +3,7 @@ html, body {
   margin: 0;
   /*background-color: #ffcc66;*/
   background-color: #FF4500;
- 
-  font-weight: 200;
+   font-weight: 200;
   font-family: "Spoqa Han Sans", sans-serif;
 }
 
@@ -31,7 +30,7 @@ li {
   margin: 0% auto;
   padding: 5%;
 /*  background-color: #FF4500; */
-background-color: #0d1117;
+ background-color: #0d1117;
 }
 
 header {
@@ -119,6 +118,7 @@ header {
 .article-content {
   font-size: 25px;
   padding-left: 30px;
+  color: #CCC1B9;
   border-left: 1px solid #994d00;
   line-height: 37px;
 }
