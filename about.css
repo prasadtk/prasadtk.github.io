@@ -2,7 +2,8 @@ html, body {
   width: 100%;
   margin: 0;
   /*background-color: #ffcc66;*/
-  background-color: #0d1117;
+ background-color: #FF4500;
+ 
   font-weight: 200;
   font-family: "Spoqa Han Sans", sans-serif;
 }
@@ -29,7 +30,9 @@ li {
   width: 90%;
   margin: 0% auto;
   padding: 5%;
-background-color: #0d1117;
+  
+/*  background-color: #FF4500; */
+   background-color: #0d1117;
 }
 
 header {
