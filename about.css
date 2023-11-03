@@ -38,7 +38,7 @@ header {
 }
 
 .header-deco {
-  width: 323px;
+  width: 627px;
   height: 10px;
   margin-bottom: 30px;
   background-color: #FF4500;
@@ -52,11 +52,11 @@ header {
   display: block;
   font-size: 60px;
   font-weight: 200;
-  color: #CCC1B9;
+  color: #FF4500;
 }
 
 .header-nickname {
-  color: #CCC1B9;
+  color: #FF4500;
   font-size: 20px;
 }
 
@@ -118,7 +118,7 @@ header {
 .article-content {
   font-size: 25px;
   padding-left: 30px;
-  color: #CCC1B9;
+  color: #FF4500;
   border-left: 1px solid #994d00;
   line-height: 37px;
 }
