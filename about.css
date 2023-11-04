@@ -40,7 +40,7 @@ header {
 .header-deco {
   height: 2px;
   margin-bottom: 30px;
-  background-color: #CF6679;
+  background-color: #FFFFFF;
 }
 
 .header-name-container {
@@ -110,7 +110,7 @@ header {
 
 .article-heading {
   font-size: 40px;
-  color: #EAB2A0;
+  color: #FFFFFF;
   /* border-bottom: 1px solid #990000; */
 }
 
