@@ -8,7 +8,7 @@ html, body {
 }
 
 a {
-  color: #CF6679;
+  color: #ffcc99;
   font-weight: 200;
   text-decoration: none;
   padding-right: 7px;
@@ -51,7 +51,7 @@ header {
   display: block;
   font-size: 60px;
   font-weight: 200;
-  color: #CF6679;
+  color: #ffcc99;
 }
 
 .header-nickname {
@@ -117,7 +117,7 @@ header {
 .article-content {
   font-size: 25px;
   padding-left: 30px;
-  color: #CF6679;
+  color: #ffcc99;
   border-left: 1px solid #994d00;
   line-height: 37px;
 }
