@@ -2,13 +2,13 @@ html, body {
   width: 100%;
   margin: 0;
   /*background-color: #ffcc66;*/
-  background-color: #FF4500;
+  background-color: #121212;
    font-weight: 200;
   font-family: "Spoqa Han Sans", sans-serif;
 }
 
 a {
-  color: #FAF0E6;
+  color: #CF6679;
   font-weight: 200;
   text-decoration: none;
   padding-right: 7px;
@@ -29,8 +29,8 @@ li {
   width: 90%;
   margin: 0% auto;
   padding: 5%;
-/*  background-color: #FF4500; */
- background-color: #0d1117;
+/*  background-color: #121212; */
+ background-color: #121212;
 }
 
 header {
@@ -40,7 +40,7 @@ header {
 .header-deco {
   height: 2px;
   margin-bottom: 30px;
-  background-color: #FAF0E6;
+  background-color: #CF6679;
 }
 
 .header-name-container {
@@ -51,11 +51,11 @@ header {
   display: block;
   font-size: 60px;
   font-weight: 200;
-  color: #FAF0E6;
+  color: #CF6679;
 }
 
 .header-nickname {
-  color: #FF4500;
+  color: #121212;
   font-size: 20px;
 }
 
@@ -74,7 +74,7 @@ header {
   width: 100%;
   height: 2px;
   margin-bottom: 15px;
-  background-color: #FAF0E6;
+  background-color: #CF6679;
 }
 
 .header-meta-container {
@@ -117,7 +117,7 @@ header {
 .article-content {
   font-size: 25px;
   padding-left: 30px;
-  color: #FAF0E6;
+  color: #CF6679;
   border-left: 1px solid #994d00;
   line-height: 37px;
 }
