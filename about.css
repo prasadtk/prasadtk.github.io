@@ -40,7 +40,7 @@ header {
 .header-deco {
   height: 2px;
   margin-bottom: 30px;
-  background-color: #FFFFFF;
+  background-color: #FFFFCC;
 }
 
 .header-name-container {
@@ -74,7 +74,7 @@ header {
   width: 100%;
   height: 2px;
   margin-bottom: 15px;
-  background-color: #CF6679;
+  background-color: #FFFFCC;
 }
 
 .header-meta-container {
@@ -110,7 +110,7 @@ header {
 
 .article-heading {
   font-size: 40px;
-  color: #FFFFFF;
+  color: #FFFFCC;
   /* border-bottom: 1px solid #990000; */
 }
 
