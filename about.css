@@ -3,7 +3,7 @@ html, body {
   margin: 0;
   /*background-color: #ffcc66;*/
   background-color: #121212;
-  background-image: url("back.jpg");
+  background-image: url("./back.jpg");
   background-repeat: repeat;
   font-weight: 200;
   font-family: "Spoqa Han Sans", sans-serif;
