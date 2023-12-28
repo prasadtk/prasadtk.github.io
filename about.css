@@ -4,7 +4,9 @@ html, body {
   /*background-color: #ffcc66;*/
   background-color: #121212;
   background-image: url("./back.jpg");
-  background-repeat: repeat;
+  background-repeat: no-repeat;  
+  background-position: 0% 0%;
+  background-size: 100% 100%;
   font-weight: 200;
   font-family: "Spoqa Han Sans", sans-serif;
 }
