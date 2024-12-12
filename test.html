@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub README Style</title>
     <style>
-:root {
-
-
+[data-theme="dark"]  {
     --background-color: #121212;
     --text-color: #f5f5f5;
     --link-color: #1e90ff;
@@ -188,37 +186,6 @@
         .toggle-button:hover {
             background-color: lighten(var(--link-color), 10%);
         }
-
-
-              /* Dark mode styles */
-        body.dark-mode {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        /* Style for the toggle button */
-        .toggle-button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 10px 20px;
-        }
-
-        .toggle-button img {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Light mode styles (default) */
-        body {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-        }
     </style>
     <script>
         function toggleContent() {
@@ -241,35 +208,6 @@
     </script>
 </head>
 <body>
-
-
-        <div class="container">
-        <button id="theme-toggle" class="toggle-button">
-            <img id="toggle-image" src="sun-icon.png" alt="Toggle Icon" />
-        </button>
-        <h1>Dark/Light Mode Toggle</h1>
-        <p>Click the button to switch between dark and light mode.</p>
-    </div>
-
-        <script>
-        // Get the toggle button and the image element
-        const toggleButton = document.getElementById("theme-toggle");
-        const toggleImage = document.getElementById("toggle-image");
-
-        // Listen for clicks on the toggle button
-        toggleButton.addEventListener("click", () => {
-            // Toggle the dark mode class on the body
-            document.body.classList.toggle("dark-mode");
-
-            // Change the image source based on the theme
-            if (document.body.classList.contains("dark-mode")) {
-                toggleImage.src = "moon-icon.png"; // Dark mode image (moon)
-            } else {
-                toggleImage.src = "sun-icon.png"; // Light mode image (sun)
-            }
-        });
-    </script>
-    
     <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <h1>Project Title</h1>
     <p>A brief description of the project goes here. Use this section to give an overview of the project's purpose and goals.</p>
