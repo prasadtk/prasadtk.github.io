@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub README Style</title>
     <style>
-[data-theme="dark"]  {
+:root {
     --background-color: #121212;
     --text-color: #f5f5f5;
     --link-color: #1e90ff;
     --border-color: #333333;
     --code-background: #2d2d2d;
     --blockquote-background: #1f1f1f;
-
 }
 
 [data-theme="light"] {
@@ -186,6 +185,19 @@
         .toggle-button:hover {
             background-color: lighten(var(--link-color), 10%);
         }
+           .toggle-button-theme {
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--link-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-button-theme:hover {
+            background-color: lighten(var(--link-color), 10%);
+        }
     </style>
     <script>
         function toggleContent() {
@@ -208,7 +220,7 @@
     </script>
 </head>
 <body>
-    <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+    <button style="float: right"; class="toggle-button-theme" onclick="toggleTheme()">&#x2600;</button>
     <h1>Project Title</h1>
     <p>A brief description of the project goes here. Use this section to give an overview of the project's purpose and goals.</p>
 
