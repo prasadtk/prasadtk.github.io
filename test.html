@@ -210,6 +210,26 @@
     </script>
 </head>
 <body>
+
+        <script>
+        // Get the toggle button and the image element
+        const toggleButton = document.getElementById("theme-toggle");
+        const toggleImage = document.getElementById("toggle-image");
+
+        // Listen for clicks on the toggle button
+        toggleButton.addEventListener("click", () => {
+            // Toggle the dark mode class on the body
+            document.body.classList.toggle("dark-mode");
+
+            // Change the image source based on the theme
+            if (document.body.classList.contains("dark-mode")) {
+                toggleImage.src = "moon-icon.png"; // Dark mode image (moon)
+            } else {
+                toggleImage.src = "sun-icon.png"; // Light mode image (sun)
+            }
+        });
+    </script>
+    
     <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <h1>Project Title</h1>
     <p>A brief description of the project goes here. Use this section to give an overview of the project's purpose and goals.</p>
