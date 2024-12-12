@@ -188,6 +188,37 @@
         .toggle-button:hover {
             background-color: lighten(var(--link-color), 10%);
         }
+
+
+              /* Dark mode styles */
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Style for the toggle button */
+        .toggle-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
+        .toggle-button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Light mode styles (default) */
+        body {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
     </style>
     <script>
         function toggleContent() {
@@ -210,6 +241,15 @@
     </script>
 </head>
 <body>
+
+
+        <div class="container">
+        <button id="theme-toggle" class="toggle-button">
+            <img id="toggle-image" src="sun-icon.png" alt="Toggle Icon" />
+        </button>
+        <h1>Dark/Light Mode Toggle</h1>
+        <p>Click the button to switch between dark and light mode.</p>
+    </div>
 
         <script>
         // Get the toggle button and the image element
