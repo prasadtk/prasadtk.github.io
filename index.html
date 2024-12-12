@@ -21,6 +21,8 @@
     --border-color: #333333;
     --code-background: #2d2d2d;
     --blockquote-background: #1f1f1f;
+    --limk-hover-color: #d94e2b;
+    --light-hover-color: #a6a6a6;
 }
 
 [data-theme="light"] {
@@ -31,6 +33,8 @@
     --border-color: #eaecef;
     --code-background: #f6f8fa;
     --blockquote-background: #f0f0f0;
+    --limk-hover-color:  #7f3b04;
+    --light-hover-color: #a6a6a6;
 }
 
 /* Make specific adjustments for body and other elements in light mode */
@@ -193,7 +197,7 @@
             transition: background-color 0.3s ease;
         }
         .toggle-button:hover {
-            background-color: lighten(var(--link-color), 10%);
+            background-color: var(--limk-hover-color);
         }
             .toggle-button1 {
             cursor: pointer;
@@ -206,7 +210,7 @@
             transition: background-color 0.3s ease;
         }
         .toggle-button1:hover {
-            background-color: lighten(var(--light-color), 10%);
+            background-color: var(--light-hover-color);
         }
             .toggle-button2 {
             cursor: pointer;
@@ -219,7 +223,7 @@
             transition: background-color 0.3s ease;
         }
         .toggle-button2:hover {
-            background-color: lighten(var(--light-color), 10%);
+            background-color: var(--light-hover-color);
         }
            .toggle-button-theme {
             cursor: pointer;
@@ -232,7 +236,7 @@
             transition: background-color 0.3s ease;
         }
         .toggle-button-theme:hover {
-             background-color: lighten(var(--light-color), 10%);
+            background-color: var(--light-hover-color);
         }
     </style>
     <script>
