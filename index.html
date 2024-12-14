@@ -238,6 +238,30 @@
         .toggle-button-theme:hover {
             background-color: var(--light-hover-color);
         }
+
+
+
+     /* Style for the button */
+        #goToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* Hidden by default */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #goToTop:hover {
+            background-color: #0056b3;
+        }
+
+
+        
     </style>
     <script>
         function toggleContent() {
@@ -395,6 +419,32 @@ Post-Doc (Protein crystallography, Biophysics, Molecular biology) </br>
     <ul>
  <li><a href="https://play.google.com/store/apps/details?id=ws.science.chemix" target="blank">CheMIX - App</a></li>
     </ul>
+
+
+<!-- Button -->
+<button id="goToTop">Go to Top</button>
+
+<script>
+    // Get the button
+    const goToTopButton = document.getElementById('goToTop');
+
+    // Show the button when the user scrolls down
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            goToTopButton.style.display = 'block';
+        } else {
+            goToTopButton.style.display = 'none';
+        }
+    };
+
+    // Scroll to the top when the button is clicked
+    goToTopButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+
+    
            <!--  section  -->
    <h4></h4>
                <a href="https://jigsaw.w3.org/css-validator/check/referer">
