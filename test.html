@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ChemDoodle Example</title>
+    <script src="https://www.ichemlabs.com/Demos/ChemDoodleWeb.js"></script>
+    <style>
+        #sketcher {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw Your Chemical Structure</h1>
+    <canvas id="sketcher"></canvas>
+    <button id="get-smiles">Get SMILES</button>
+    <script>
+        // Initialize the ChemDoodle sketcher
+        var sketcher = new ChemDoodle.SketcherCanvas('sketcher', 500, 500);
+
+        // Add event listener to the button to retrieve the SMILES string
+        document.getElementById('get-smiles').addEventListener('click', function() {
+            var smiles = sketcher.getMolecule().toSMILES();
+            alert('SMILES: ' + smiles);
+        });
+    </script>
+</body>
+</html>
