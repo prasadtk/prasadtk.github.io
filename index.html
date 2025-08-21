@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Drug discovery scientist focusing on protein structure determination, small molecule screening, computational medicinal chemistry, and synthetic chemistry - Thazhe Kootteri Prasad">
+      <meta name="copyright" content="Copyright 2024 PRASAD. Some Rights Reserved.">
+      <meta name="author" content="Thazhe Kootteri Prasad - Personal Homepage">
+      <meta name="language" content="English">
+     <title>Prasad Thazhe Kootteri</title>
+
+     <link rel="shortcut icon" type="image/ico" href="favicon.ico">
+     <link rel="icon" href="favicon.png" type="image/png">
+
+    <style>
+:root {
+    --background-color: #121212;
+    --text-color: #f5f5f5;
+    --link-color: #d9b32b;
+    --light-color: #383838;
+    --border-color: #333333;
+    --code-background: #2d2d2d;
+    --blockquote-background: #1f1f1f;
+    --limk-hover-color: #d94e2b;
+    --light-hover-color: #a6a6a6;
+}
+
+[data-theme="light"] {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --link-color: #7F4304;
+    --light-color: #F0F0F0;
+    --border-color: #eaecef;
+    --code-background: #f6f8fa;
+    --blockquote-background: #f0f0f0;
+    --limk-hover-color:  #7f3b04;
+    --light-hover-color: #a6a6a6;
+}
+
+/* Make specific adjustments for body and other elements in light mode */
+[data-theme="light"] body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+[data-theme="light"] a {
+    color: var(--link-color);
+}
+
+[data-theme="light"] pre,
+[data-theme="light"] code {
+    background-color: var(--code-background);
+}
+
+/* Add specific styles for headers in light mode */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Dark mode blockquote */
+[data-theme="light"] blockquote {
+    background-color: var(--blockquote-background);
+    color: var(--text-color);
+}
+
+/* Dark mode table styles */
+[data-theme="light"] table th,
+[data-theme="light"] table td {
+    border-color: var(--border-color);
+}
+
+
+        body {
+            font-family: 'Roboto Slab', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 2em;
+        }
+        h3 {
+            font-size: 1.5em;
+        }
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .thin-line {
+            border: none;
+            border-top: 0.1px solid #808080;
+            margin-top: 5px;
+            opacity: 0.5;
+           }
+        
+        code {
+            background-color: var(--code-background);
+            border-radius: 5px;
+            padding: 0.2em 0.4em;
+            font-size: 90%;
+            font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: var(--code-background);
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+            line-height: 1.5;
+            font-size: 90%;
+            border: 1px solid var(--border-color);
+        }
+        ul, ol {
+            padding-left: 1.5em;
+        }
+        ul {
+            list-style-type: disc;
+        }
+        ol {
+            list-style-type: decimal;
+        }
+        blockquote {
+            padding: 1em;
+            color: var(--text-color);
+            background-color: var(--blockquote-background);
+            border-left: 5px solid var(--border-color);
+            margin: 1em 0;
+            border-radius: 5px;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+        }
+        th {
+            background-color: var(--code-background);
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.7em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            pre, code {
+                font-size: 85%;
+            }
+        }
+
+        /* Styles for expandable content */
+        .hidden-content {
+            display: none;
+            margin-top: 10px;
+            padding: 0px;
+            background-color: transparent;
+            border: 0px solid var(--border-color);
+            border-radius: 0px;
+        }
+        .toggle-button {
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--link-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-button:hover {
+            background-color: var(--limk-hover-color);
+        }
+            .toggle-button1 {
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-button1:hover {
+            background-color: var(--light-hover-color);
+        }
+            .toggle-button2 {
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-button2:hover {
+            background-color: var(--light-hover-color);
+        }
+           .toggle-button-theme {
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-button-theme:hover {
+            background-color: var(--light-hover-color);
+        }
+
+
+
+     /* Style for the button */
+        #goToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* Hidden by default */
+            background-color: #d9b32b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #goToTop:hover {
+            background-color: #808080;
+        }
+
+
+        
+    </style>
+    <script>
+        function toggleContent() {
+            const content = document.getElementById('hiddenContent');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+
+                function toggleContent1() {
+            const content = document.getElementById('hiddenContent1');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+                function toggleContent2() {
+            const content = document.getElementById('hiddenContent2');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        }
+    </script>
+</head>
+<body>
+    <button style="float: right" class="toggle-button-theme" onclick="toggleTheme()">&#x2600;</button>
+    <h1>Prasad Thazhe Kootteri</h1>
+    I’m a drug discovery scientist actively engaged in developing novel approaches to small molecule therapeutics. My work centers on the identification, structural characterization, and validation of bioactive compounds with potential clinical relevance, contributing to early-stage pipeline development and translational research.<br>
+    With hands-on expertise in protein biology, X-ray crystallography, NMR spectroscopy, computational medicinal chemistry, and synthetic chemistry, I specialize in integrating structural and functional data to inform rational drug design. I’m particularly focused on leveraging structure-based approaches and molecular modeling to accelerate hit identification and lead optimization.<br>
+    My approach bridges experimental and computational disciplines, enabling efficient target validation and mechanism-of-action elucidation. I thrive in collaborative, cross-functional environments and am passionate about translating molecular insights into tangible therapeutic outcomes.<br>
+    Whether it’s solving complex binding interactions or optimizing compound libraries, I’m driven by the challenge of transforming scientific discovery into real-world impact.
+    <!--  section  -->
+    <h2>Current Research Interests</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Drug_discovery" target="blank">Drug discovery</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Structural_biology" target="blank">Structural biology</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Medicinal_chemistry" target="blank">Medicinal chemistry</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Chemical_biology" target="blank">Chemical biology</a> </li>
+    </ul>
+       <!--  section  -->
+    <h2>Research Interests</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Supramolecular_chemistry" target="blank">Supramolecular chemistry</a>
+        <li><a href="https://en.wikipedia.org/wiki/Chemical_synthesis" target="blank">Chemical synthesis</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Bioinformatics" target="blank">Bioinformatics</a> and <a href="https://en.wikipedia.org/wiki/Cheminformatics" target="blank">Cheminformatics</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Synthetic_biology" target="blank">Synthetic biology</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/Biogeography" target="blank">Biogeography</a> </li>
+    </ul>
+       <!--  section  -->    
+    <h2>Area of Expertise</h2>
+        <a href="https://en.wikipedia.org/wiki/Analytical_chemistry" target="blank">Analytical chemistry</a>, <a href="https://en.wikipedia.org/wiki/Biophysics" target="blank">Biophysics</a>, <a href="https://en.wikipedia.org/wiki/Computational_chemistry" target="blank">Computational chemistry</a>, <a href="https://en.wikipedia.org/wiki/Crystallography" target="blank">Crystallography</a>, <a href="https://en.wikipedia.org/wiki/Spectroscopy" target="blank">Spectroscopy </a>, <a href="https://en.wikipedia.org/wiki/Inorganic_chemistry" target="blank">Inorganic chemistry</a>, <a href="https://en.wikipedia.org/wiki/Materials_science" target="blank">Materials chemistry</a>, <a href="https://en.wikipedia.org/wiki/Molecular_biology" target="blank">Molecular biology</a>, <a href="https://en.wikipedia.org/wiki/Organic_synthesis" target="blank">Organic synthesis</a>, <a href="https://en.wikipedia.org/wiki/Protein" target="blank">Protein biochemistry</a>, <a href="https://en.wikipedia.org/wiki/Solid-state_chemistry" target="blank">Solid-state chemistry</a>, <a href="https://en.wikipedia.org/wiki/Supramolecular_chemistry" target="blank">Supramolecular chemistry</a>
+       <!--  section  -->
+    <h2>Contact</h2>
+        <a href="mailto:" target="blank">E-mail: </a>hello(at)prasad.zip
+       <!--  section  -->
+    <h2>Research Experience</h2>
+        Research Scientist (Drug discovery) <br>  <a href="https://www.instem.res.in/" target="blank">Institute for Stem Cell Biology and Regenerative Medicine</a>, <a href="https://www.instem.res.in/ccbt" target="blank">Centre for Chemical Biology and Therapeutics</a>, Bangalore, India <br> 2018 - 2025<br>
+    <button style="float: right" class="toggle-button1" onclick="toggleContent1()">Show More</button> <br>
+    <div id="hiddenContent1" class="hidden-content">
+                     Post-Doc (Protein crystallography, Biophysics, Molecular biology) <br>
+                     <a href="https://iisc.ac.in" target="blank">Indian Institute of Science</a>, <a href="http://mbu.iisc.ac.in" target="blank">Molecular Biophysics Unit</a>, Bangalore, India <br> 2014 - 2017 <br> <br>
+                     Post-Doc (Inorganic, Organic synthesis, Supramolecular chemistry) <br>
+                     <a href="https://en.snu.ac.kr/" target="blank">Seoul National University</a>, <a href="http://chem.snu.ac.kr" target="blank">Department of Chemistry </a> Seoul, Republic of Korea <br> 2013 - 2014 | 2011 - 2012 | 2008 - 2009<br> <br>
+                     Post-Doc (Inorganic chemistry, Crystallography) <br>
+                     <a href="https://uni-bielefeld.de" target="blank">Bielefeld University</a>, <a href="https://www.uni-bielefeld.de/(en)/chemie/" target="blank">Department of Chemistry</a> Bielefeld, Germany <br> 2012 - 2013 <br><br>
+                     Post-Doc (Inorganic, Organic Synthesis, Molecular Magnetism) <br> <a href="https://www.unimore.it" target="blank">UNIMORE </a>, <a href="https://www.dscg.unimore.it/it" target="blank">Department of Chemical and Geological Sciences</a>
+                     Moderna, Italy <br> 2010 - 2011 <br><br>
+                     Post-Doc (Main group chemistry, Metal-based drugs, Crystallography)<br> <a href="https://uohyd.ac.in" target="blank">University of Hyderabad </a>, <a href="http://chemistry.uohyd.ac.in" target="blank">School of Chemistry </a>
+                     Hyderabad, India<br> 2008<br>
+    </div>
+       <!--  section  -->
+        <h2>Education</h2>
+           Ph.D. (Chemistry)<br> <a href="http://uohyd.ac.in" target="blank">University of Hyderabad</a>, <a href="http://chemistry.uohyd.ac.in" target="blank">School of Chemistry</a>, Hyderabad, India <a href="http://igmlnet.uohyd.ac.in:8080/lib/item?id=chamo:1493434" target="blank">(Thesis)</a><br> 2002 - 2007<br> 
+
+  
+    
+    
+    <!--  section  -->
+        <h2>Profile</h2>
+   <a href="https://orcid.org/0000-0002-0524-8000" target="blank">ORCID: 0000-0002-0524-8000</a><br>
+   <a href="https://scholar.google.com/citations?user=ZzBa1tUAAAAJ&hl=en" target="blank">Google Scholar</a><br>
+       <!--  section  -->
+        <h2>Publications</h2>
+   <ul>
+    <li>S. Jos, A. Kambaru, T. K. Prasad, S. Parthasarathi, N. Kamariah, S. Nath, B. Padmanabhan, S. Padavattan, Structural and functional insights into the nuclear role of Parkinson’s disease-associated α-synuclein as a histone chaperone. &nbsp;<a href="https://doi.org/10.1038/s42003-025-08138-0" target="blank"><i>Communications Biology</i> 2025, <i>8</i>, 712.</a></li>
+           </ul>
+     
+    <button style="float: right" class="toggle-button2" onclick="toggleContent2()">Show More</button> <br>
+    <div id="hiddenContent2" class="hidden-content">
+<ul>
+<li>V. Kumar, P. K. Chunchagatta Lakshman, T. K. Prasad, K. Manjunath, S. Bairy, A. S. Vasu, B. Ganavi, S. Jasti, N. Kamariah, Target-based drug discovery: Applications of fluorescence techniques in high throughput and fragment-based screening. &nbsp;<a href="https://doi.org/10.1016/j.heliyon.2023.e23864" target="blank"><i>Heliyon</i> 2024, <i>10</i>, e23864.</a></li>
+<li>R. Kavya, A. Snehal, S. Jos, T. K. Prasad, K. N. Kumuda, S. Unni, B. Padmanabhan, N. Kamariah, S. Padaanabhan, R. B. Mythri, High-affinity binding of celastrol to monomeric α-synuclein mitigates in vitro aggregation. &nbsp;<a href="https://doi.org/10.1080/07391102.2023.2175379" target="blank"><i>J. Biomol. Struct. Dyn.</i> 2023, <i>41</i>, 12703-12713.</a></li>
+<li>S. Jos, H. Gogoi, T. K. Prasad, M. A. Hurakadli, N. Kamariah, B. Padmanabhan, S. Padavattan, Molecular insights into α-synuclein interaction with individual human core histones, linker histone, and dsDNA. &nbsp;<a href="https://doi.org/10.1002/pro.4167" target="blank"><i>Protein. Sci.</i> 2021, <i>30</i>, 2121-2131.</a> </li>
+<li>A. E. Bryn, S. Hardwick, A. T. Crooks, N. Milech, P. M. Watt, C. Mithra, V. Kumar, S. Giridharan, G. Sadasivam, S. Mathivanan, S. Sudhakar, S. Bairy, K. Bharatham M. A. Hurakadli, T. K. Prasad, N. Kamariah, M. Muellner, M. Coelho, C. J. Torrance, G. J. McKenzie, A. R. Venkitaraman, Target identification for small-molecule discovery in the FOXO3a tumor-suppressor pathway using a biodiverse peptide library. &nbsp;<a href="https://doi.org/10.1016/j.chembiol.2021.05.009" target="blank"><i>Cell Chem. Biol.</i> 2021, <i>28</i>, 16052-1615.</a> </li>
+<li>T. K. Prasad, M. P. Suh, Synthesis of multifunctional metal–organic frameworks and tuning the functionalities with pendant ligands. &nbsp;<a href="https://doi.org/10.1039/D0DT03012K" target="blank"><i>Dalton Trans.</i> 2020, <i>49</i>, 15034-15040.</a> </li>
+<li>T. K. Prasad, M. P. Suh, Metal-Organic Frameworks Incorporating Various Alkoxy Pendant Groups: Hollow Tubular Morphologies, X-ray Single-Crystal Structures, and Selective Carbon Dioxide Adsorption Properties. &nbsp;<a href="http://dx.doi.org/10.1002/asia.201500332" target="blank"><i>Chem. As. J.</i> 2015, <i>10</i>, 2257-2263. </a></li>
+<li>A. Muller, S. Garai, C. Schaffer, A. Merca, H. Bogge, A. J. M. Al-Karawi, T. K. Prasad, Water Segregation/Repellency in Hydrophobic Nanocapsules. &nbsp;<a href="http://dx.doi.org/10.1002/chem.201402216" target="blank"><i>Chem. Eur. J.</i> 2014, <i>20</i>, 6659-6664.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Novel three-dimensional coordination polymers of lanthanides with sulfate and oxydiacetic acid. &nbsp;<a href="http://dx.doi.org/10.1107/S0108270113031806" target="blank"><i>Acta Cryst</i>. 2013, <i>C69</i>, 1503-1508.</a></li>
+<li>T. K. Prasad, M. P. Suh, Control of Interpenetration and Gas-Sorption Properties of Metal-Organic Frameworks by a Simple Change in Ligand Design. &nbsp;<a href="http://dx.doi.org/10.1002/chem.201200456" target="blank"><i>Chem. Eur. J.</i> 2012, <i>18</i>, 8673-8680.</a></li>
+<li>T. K. Prasad, G. Poneti, L. Sorace, M. J. Rodriguez-Douton, A.-L. Barra, P. Neugebauer, L. Costantino, R. Sessoli, A. Cornia, Magnetic and optical bistability in tetrairon(III) Single Molecule Magnets functionalized with azobenzene groups. &nbsp;<a href="http://dx.doi.org/10.1039/c2dt30172e" target="blank"><i>Dalton Trans.</i> 2012, <i>41</i>, 8368-8378.</a></li>
+<li>M. P. Suh, H. J. Park, T. K. Prasad, D.-W. Lim, Hydrogen Storage in Metal-Organic Frameworks. &nbsp;<a href="http://dx.doi.org/10.1021/cr200274s" target="blank"><i>Chem. Rev.</i> 2012, <i>112</i>, 782-835.</a></li>
+<li>O. O. E. Onawumi, O. O. P. Faboya, O. A. Odunola, T. K. Prasad, M. V. Rajasekharan, Mixed ligand tris-chelate of copper(II) with N,N-donor ligands - Synthesis, structure and spectra of [Cu(en)(phen)2]X2 2phen 8H2O (X = Cl-, NO3-) .&nbsp;<a href="http://dx.doi.org/10.1016/j.poly.2010.12.004" target="blank"><i>Polyhedron</i> 2011, <i>30</i>, 725-729.</a></li>
+<li>T. K. Prasad, D.-H. Hong, M. P. Suh, High Gas Sorption and Metal-Ion Exchange of Microporous Metal-Organic Frameworks with Incorporated Imide Groups. &nbsp;<a href="http://dx.doi.org/10.1002/chem.201002135" target="blank"><i>Chem. Eur. J.</i> 2010, <i>16</i>, 14043-14050.</a></li>
+<li>O. Anjaneyulu, T. K. Prasad, K. C. Kumara Swamy, Tris(4-oxy-pyridinium)nitrato lanthanide complexes [M(4-O-C6H4NH)3(NO3)2(H2O)2] [NO3] {M = La, Ce, Pr, Nd, Eu, Gd}- Synthesis, properties and structural characterization. &nbsp;<a href="http://dx.doi.org/10.1016/j.ica.2010.03.035" target="blank"><i>Inorg. Chim. Acta</i>. 2010, <i>363</i>, 2990-2995.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Heterometallic coordination compounds of dipicolinic acid with cerium(III, IV) and copper(II). Synthesis, crystal structure and spectral studies. &nbsp;<a href="http://dx.doi.org/10.1016/j.ica.2010.03.070" target="blank"><i>Inorg. Chim. Acta</i>. 2010, <i>363</i>, 2971-2976.</a></li>
+<li>O. Anjaneyulu, T. K. Prasad, K. C. Kumara Swamy, Coordinatively polymeric and monomeric bismuth(III) complexes with pyridine carboxylic acids. &nbsp;<a href="http://dx.doi.org/10.1039/b920775a" target="blank"><i>Dalton Trans</i>. 2010, <i>39</i>, 1935-1940.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Cerium(IV)-Lanthanide(III)-Pyridine-2,6-dicarboxylic Acid System: Coordination Salts, Chains, and Rings. &nbsp;<a href="http://dx.doi.org/10.1021/ic901066v" target="blank"><i>Inorg. Chem.</i> 2009, <i>48</i>, 11543-11550.</a></li>
+<li>P. K. Poddutoori, P. Poddutoori, B. G. Maiya, T. K. Prasad, Y. Kandrashkin, S. Vassiliev, D. Bruce, A. v. d. Est, Redox control of photo-induced electron transfer in axial terpyridoxy porphyrin complexes. &nbsp;<a href="http://dx.doi.org/10.1021/ic702480m" target="blank"><i>Inorg. Chem.</i> 2008, <i>47</i>, 7512-7522.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Solvent Dependent Crystallization of Isomeric Chain Coordination Polymers in the Ce-Zn/Cd-dipic System. &nbsp;<a href="http://dx.doi.org/10.1021/cg070349z" target="blank"><i>Cryst. Growth. Des</i>. 2008, <i>8</i>, 1346-1352.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Synthesis and Structural Characterisation of a Mixed-valent Cerium Complex Containing a (H2O)38 Cluster. &nbsp;<a href="http://www.tandfonline.com/doi/full/10.1080/15533170701853967" target="blank"><i>Synthesis and Reactivity in Inorganic, Metal-Organic, and Nano-Metal Chemistry</i> 2008, <i>38</i>, 55-61.</a></li>
+<li>O. O. E. Onawumi, O. O. P. Faboya, O. A. Odunola, T. K. Prasad, M. V. Rajasekharan,&nbsp;Synthesis, structure and spectral studies on mixed ligand copper(II) complexes of diimines and acetylacetonate.&nbsp;<a href="http://dx.doi.org/10.1016/j.poly.2007.08.041" target="blank"><i>Polyhedron</i> 2008, <i>27</i>, 113-117.</a></li>
+<li>T. K. Prasad, J.-P. Costes, M. V. Rajasekharan, A Cubic 3d-4f Structure with Only Ferromagnetic Gd-Mn Interactions. &nbsp;<a href="http://dx.doi.org/10.1002/anie.200605062" target="blank"><i>Angew. Chem. Int. Ed.</i> 2007, <i>46</i>, 2851-2854.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, [M(dipicH2)(H2O)3]2+, M = Ni, Cu, Zn (dipicH2 = dipicolinic acid) A combined crystallographic, spectroscopic and computational study. &nbsp;<a href="http://dx.doi.org/10.1016/j.poly.2006.11.029" target="blank"><i>Polyhedron</i> 2007, <i>26</i>, 1364-1372.</a></li>
+<li>O. O. E. Onawumi, O. O. P. Faboya, O. A. Odunola, T. K. Prasad, M. V. Rajasekharan,&nbsp;Solvent water tapes in two hydrates of mu-oxo-bis[bis(2,2'-bipyridine)-(sulfato)iron(III)].&nbsp;<a href="http://dx.doi.org/10.1107/S0108270106034275" target="blank"><i>Acta. Cryst.</i> 2006, <i>C62</i>, m480-m483.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, A Novel Water Octamer in Ce(dipic)2(H2O)3.4H2O: Crystallographic, Thermal, and Theoretical Studies. &nbsp;<a href="http://dx.doi.org/10.1021/cg050417m" target="blank"><i>Cryst. Growth. Des.</i> 2006, <i>6</i>, 488-491.</a></li>
+<li>M. A. H. Khan, T. K. Prasad, M. V. Rajasekharan, Silver(I) complexes of 2-(2-amino-ethyl)pyridine: nitrate and per-chlorate salts of bis[2-(2-amino-ethyl)pyridine] disilver(I).&nbsp;<a href="http://dx.doi.org/10.1107/S0108270105012448" target="blank"><i>Acta. Cryst.</i> 2005, <i>C61</i>, m281-m283.</a></li>
+<li>T. K. Prasad, M. V. Rajasekharan, Inter-conversion of 1-D coordination polymers in the Ce-Sr-dipicH2 system (dipicH2 = dipicolinic acid). &nbsp;<a href="http://dx.doi.org/10.1016/j.inoche.2005.09.019" target="blank"><i>Inorg. Chem. Commun.</i> 2005, <i>8</i>, 1116-1119.</a></li>
+<li>T. K. Prasad, S. Sailaja, M. V. Rajasekharan, 1-Dimensional and 2-dimensional coordination network structures in the Ba-Ce-dipicH2 system (dipicH2 = dipicolinic acid).&nbsp;<a href="http://dx.doi.org/10.1016/j.poly.2005.03.104" target="blank"><i>Polyhedron</i>  2005, <i>24</i>, 1487-1496.</a></li>
+</ul>
+<h4>Book chapter</h4>
+<ul>
+<li>T. K. Prasad, S. Bairy, N. Kamariah, Characterization of FOXO3-14-3-3 Interaction by Isothermal Titration Calorimetry. <a href="https://doi.org/10.1007/978-1-0716-4217-7_10" target="blank">In FOXO Transcription Factors: Methods and Protocols; Link, W., Ed.; Springer US: New York, NY, 2025; pp 107–114.</a></li>
+</ul>
+    </div>
+       <!--  section  -->
+    <h2>Mentors</h2>
+    <ul>
+       <li> <a href="http://chemistry.uohyd.ac.in/mvr.htm" target="blank">M. V. Rajasekharan</a></li>
+       <li> <a href="http://chemistry.uohyd.ac.in/kck.htm" target="blank">K. C. Kumara Swamy</a></li>
+       <li> <a href="http://mpsuh.snu.ac.kr/" target="blank">Myunghyun Paik Suh</a></li>
+       <li> <a href="http://personale.unimore.it/rubrica/dettaglio/acornia" target="blank">Andrea Cornia</a></li>
+       <li> <a href="https://en.wikipedia.org/wiki/Achim_M%C3%BCller" target="blank">Achim Müller</a></li>
+       <li> <a href="http://mbu.iisc.ac.in/ksgrp/public_html/index.html" target="blank">Kaza Suguna</a></li>
+       <li> <a href="https://en.wikipedia.org/wiki/Internet" target="blank">Internet</a></li>
+    </ul>
+       <!--  section  -->
+    <h2>Tools</h2>
+    <ul>
+ <li><a href="https://play.google.com/store/apps/details?id=ws.science.chemix" target="blank">CheMIX - App</a></li>
+ <li><a href="https://prasad.zip/ketcher" target="blank">Ketcher - Chemical structure editor</a></li>
+    </ul>
+
+
+<!-- Button -->
+<button id="goToTop"><span class="code char">▲</span></button>
+
+<script>
+    // Get the button
+    const goToTopButton = document.getElementById('goToTop');
+
+    // Show the button when the user scrolls down
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            goToTopButton.style.display = 'block';
+        } else {
+            goToTopButton.style.display = 'none';
+        }
+    };
+
+    // Scroll to the top when the button is clicked
+    goToTopButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+
+    
+           <!--  section  -->
+   <hr class="thin-line">
+         <a href="https://validator.w3.org/nu/?doc=https://prasad.zip">
+             <img style="border:0;width:40px;height:15px" src="https://www.w3.org/Icons/valid-html401.png" alt="Valid HTML!"></a> 
+         <a href="https://jigsaw.w3.org/css-validator/check/referer">
+             <img style="border:0;width:40px;height:15px" src="https://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!"></a> 
+    updated: 01.01.25 | &copy; prasadtk | visits: 
+            <!-- Start of Counter  -->
+            <script>
+               var sc_project=11592549; 
+               var sc_invisible=0; 
+               var sc_security="9a20cdec"; 
+               var sc_text=5; 
+               var scJsHost = (("https:" == document.location.protocol) ?
+               "https://secure." : "http://www.");
+               document.write("<sc"+"ript type='text/javascript' src='" +
+               scJsHost+
+               "statcounter.com/counter/counter.js'></"+"script>");
+            </script>
+            <noscript>
+               <div class="statcounter"><a title="free web stats"
+                  href="http://statcounter.com/" target="_blank"><img
+                  class="statcounter"
+                  src="//c.statcounter.com/11592549/0/9a20cdec/0/" alt="free
+                  web stats"></a></div>
+            </noscript>
+            <!-- End of Counter  -->
+            
+</body>
+</html>
