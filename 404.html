@@ -1,17 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Drug discovery scientist focusing on protein structure determination, small molecule screening, computational medicinal chemistry, and synthetic chemistry - Thazhe Kootteri Prasad - Personal Homepage">
-      <meta name="copyright" content="Copyright 2025 PRASAD. Some Rights Reserved.">
-      <meta name="author" content="Thazhe Kootteri Prasad">
-    <link rel="canonical" href="https://prasadtk.pages.dev">
-    <meta http-equiv="refresh" content="0; URL=https://prasadtk.pages.dev">
-      <meta name="language" content="English">
-      <title>Prasad Thazhe Kootteri</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404</title>
+
+  <!-- Optional futuristic font (Geist Sans fallback to system) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0f14;
+      --bg-2: #0b1118;
+      --text: #e8f0ff;
+      --muted: #8aa0b8;
+      --neon: #35e0ff;
+      --accent: #22ffb6;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(1000px 500px at 70% 20%, #0d1620 0%, var(--bg) 60%) fixed,
+        linear-gradient(180deg, var(--bg-2), var(--bg)) fixed;
+    }
+
+    .wrap {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .code {
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      color: var(--text);
+      text-shadow:
+        0 0 12px rgba(53, 224, 255, 0.35),
+        0 0 24px rgba(34, 255, 182, 0.25);
+      margin: 0 0 0.75rem;
+    }
+
+    .eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .message {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 48ch;
+      margin: 0 auto 1.25rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(53, 224, 255, 0.35);
+      color: var(--text);
+      background:
+        linear-gradient(180deg, #0c141d, #0a1118) padding-box,
+        radial-gradient(120% 120% at 0% 0%, var(--neon), transparent 60%) border-box;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+    .btn:hover {
+      border-color: rgba(34, 255, 182, 0.6);
+      box-shadow: 0 0 0 3px rgba(53, 224, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 0 0 2px rgba(53, 224, 255, 0.2);
+    }
+
+    /* Soft, minimal background motion */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(600px 300px at 20% 80%, rgba(34, 255, 182, 0.08), transparent 60%),
+        radial-gradient(500px 250px at 80% 20%, rgba(53, 224, 255, 0.08), transparent 60%);
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate3d(0, 0, 0); filter: blur(0px); }
+      100% { transform: translate3d(6px, -6px, 0); filter: blur(0.2px); }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .ambient { animation: none; }
+    }
+
+    /* Accessibility focus ring */
+    :focus-visible {
+      outline: 2px solid var(--neon);
+      outline-offset: 3px;
+    }
+  </style>
 </head>
 <body>
-      <p>It’s probably stuck in a time loop, <a href="https://prasadtk.pages.dev">take me home.</a> </p>     
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main class="wrap" role="main" aria-label="404 page">
+    <div class="eyebrow">Status 404</div>
+    <h1 class="code" aria-label="404">404</h1>
+    <p class="message">Page not found. Let’s get you back on track.</p>
+    <button class="btn" id="homeBtn" aria-label="Return to homepage">Return home</button>
+  </main>
+
+  <script>
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      // Replace with your app's root path
+      window.location.href = '/';
+    });
+  </script>
 </body>
 </html>
