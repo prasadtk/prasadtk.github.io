@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Hyperspace Drift</title>
+  <!--
+    Futuristic 404 for tech enthusiasts
+    - Dark neon theme
+    - Glitch animation
+    - Animated background grid
+    - Home button
+    - Clean, accessible, and responsive
+  -->
+
+  <!-- Inter font for modern tech feel -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Theme tokens */
+      --bg: #0b0f14;
+      --bg-2: #0f141b;
+      --text: #d9e6ff;
+      --muted: #7b8aa4;
+      --neon: #33e1ff;
+      --neon-2: #9d4edd;
+      --accent: #2afc98;
+      --danger: #ff4d6d;
+
+      /* Glow & depth */
+      --glow: 0 0 12px rgba(51, 225, 255, 0.6), 0 0 24px rgba(51, 225, 255, 0.3);
+      --glow-purple: 0 0 12px rgba(157, 78, 221, 0.6), 0 0 24px rgba(157, 78, 221, 0.3);
+
+      /* Layout */
+      --max-w: 72rem;
+    }
+
+    /* Reset + base */
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: radial-gradient(1200px 500px at 70% 30%, #0c1219 0%, var(--bg) 60%) fixed;
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Main container */
+    .shell {
+      position: relative;
+      width: min(95vw, var(--max-w));
+      padding: 2rem;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(18, 24, 31, 0.85), rgba(11, 15, 20, 0.85));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      isolation: isolate;
+    }
+
+    /* Neon frame accent */
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      padding: 2px;
+      background:
+        conic-gradient(from 180deg at 40% 40%, var(--neon), transparent 20%, var(--neon-2), transparent 60%, var(--accent), transparent);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      filter: blur(10px) saturate(1.2);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* Animated background grid */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(transparent, transparent 98%, rgba(51, 225, 255, 0.08)),
+        linear-gradient(90deg, transparent, transparent 98%, rgba(157, 78, 221, 0.08));
+      background-size: 28px 28px;
+      mix-blend-mode: lighten;
+      animation: slide-grid 16s linear infinite;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: -1;
+    }
+    @keyframes slide-grid {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-56px, -56px, 0); }
+    }
+
+    /* Header block */
+    .header {
+      display: grid;
+      gap: 0.75rem;
+      align-items: start;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Glitch 404 */
+    .code {
+      position: relative;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 6vw + 1rem, 9rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-shadow: var(--glow);
+      --clip-a: polygon(0 2%, 100% 0, 100% 38%, 0 40%);
+      --clip-b: polygon(0 60%, 100% 58%, 100% 100%, 0 98%);
+    }
+    .code::before,
+    .code::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      color: var(--neon);
+      mix-blend-mode: screen;
+    }
+    .code::before {
+      text-shadow: var(--glow);
+      clip-path: var(--clip-a);
+      transform: translate(-2px, -1px);
+      animation: glitchA 2.4s infinite steps(1, end);
+    }
+    .code::after {
+      color: var(--neon-2);
+      text-shadow: var(--glow-purple);
+      clip-path: var(--clip-b);
+      transform: translate(2px, 1px);
+      animation: glitchB 2.2s infinite steps(1, end);
+    }
+    @keyframes glitchA {
+      0% { clip-path: var(--clip-a); opacity: 0.9; }
+      15% { transform: translate(-1px, 1px); opacity: 0.7; }
+      30% { transform: translate(-3px, -2px); opacity: 1; }
+      45% { transform: translate(-1px, 0); opacity: 0.6; }
+      60% { transform: translate(-2px, 1px); opacity: 0.9; }
+      75% { transform: translate(-4px, -1px); opacity: 0.8; }
+      100% { transform: translate(-2px, -1px); opacity: 0.9; }
+    }
+    @keyframes glitchB {
+      0% { clip-path: var(--clip-b); opacity: 0.9; }
+      20% { transform: translate(1px, -1px); opacity: 0.6; }
+      40% { transform: translate(3px, 2px); opacity: 1; }
+      55% { transform: translate(1px, 0); opacity: 0.7; }
+      70% { transform: translate(2px, -1px); opacity: 0.9; }
+      85% { transform: translate(4px, 1px); opacity: 0.8; }
+      100% { transform: translate(2px, 1px); opacity: 0.9; }
+    }
+
+    /* Message block */
+    .message {
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .message strong {
+      color: var(--text);
+    }
+
+    /* Actions */
+    .actions {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .btn {
+      --btn-bg: #121820;
+      --btn-border: rgba(51, 225, 255, 0.3);
+      --btn-glow: rgba(51, 225, 255, 0.5);
+      appearance: none;
+      border: 1px solid var(--btn-border);
+      color: var(--text);
+      background: linear-gradient(180deg, var(--btn-bg), #0b0f14);
+      padding: 0.8rem 1.1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:hover {
+      border-color: var(--neon);
+      box-shadow: 0 0 0 3px var(--btn-glow), var(--glow);
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 0 0 2px var(--btn-glow);
+    }
+    .btn.primary {
+      background:
+        linear-gradient(180deg, #0c1420, #0a1118) padding-box,
+        radial-gradient(100% 100% at 0% 0%, var(--neon), transparent 60%) border-box;
+      border-color: rgba(157, 78, 221, 0.5);
+    }
+
+    /* Sub-actions */
+    .sub {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .link {
+      color: var(--neon);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(51, 225, 255, 0.4);
+      transition: color 150ms ease, border-color 150ms ease;
+    }
+    .link:hover {
+      color: var(--accent);
+      border-color: rgba(42, 252, 152, 0.5);
+    }
+
+    /* Footer diagnostics */
+    .diag {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.06);
+      display: grid;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .diag code {
+      background: #0e141b;
+      color: var(--text);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Responsive niceties */
+    @media (max-width: 560px) {
+      .message { font-size: 0.95rem; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    /* Accessibility focus ring */
+    :focus-visible {
+      outline: 2px solid var(--neon);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background grid layer -->
+  <div class="grid" aria-hidden="true"></div>
+
+  <!-- Content shell -->
+  <main class="shell" role="main" aria-label="404 error page">
+    <div class="header">
+      <div class="eyebrow">Status: 404 • Resource not found</div>
+      <h1 class="code" data-text="404" aria-label="404">404</h1>
+    </div>
+
+    <p class="message">
+      <strong>Oops! The server went into hyperspace.</strong> The endpoint you’re pinging doesn’t resolve. It may have been deprecated,
+      moved, or swallowed by a rogue microservice. Double-check the route, the case sensitivity, and your trailing slashes.
+    </p>
+
+    <div class="actions">
+      <button class="btn primary" id="homeBtn" aria-label="Return to homepage">Return to homepage</button>
+      <button class="btn" id="retryBtn" aria-label="Retry">Retry request</button>
+    </div>
+
+    <div class="sub">
+      <span>Need a clue?</span>
+      <a class="link" href="#" id="docsLink">Open docs</a>
+      <a class="link" href="#" id="supportLink">Contact support</a>
+    </div>
+
+    <section class="diag" aria-label="Diagnostics">
+      <div>Request ID: <code id="reqId">—</code></div>
+      <div>Path: <code id="path">/unknown</code></div>
+      <div>Timestamp: <code id="stamp">—</code></div>
+      <div>Hint: Press <code>G</code> to toggle glitch or <code>Space</code> for pulse.</div>
+    </section>
+  </main>
+
+  <script>
+    // Utility: generate short random ID
+    function nanoId(len = 8) {
+      const chars = "abcdef0123456789";
+      let id = "";
+      for (let i = 0; i < len; i++) id += chars[Math.floor(Math.random() * chars.length)];
+      return id;
+    }
+
+    // Populate diagnostics
+    (function initDiagnostics() {
+      const reqIdEl = document.getElementById("reqId");
+      const pathEl = document.getElementById("path");
+      const stampEl = document.getElementById("stamp");
+
+      // In a real app, replace with actual request context
+      reqIdEl.textContent = nanoId(10);
+      pathEl.textContent = decodeURIComponent(location.pathname || "/unknown");
+      stampEl.textContent = new Date().toLocaleString();
+    })();
+
+    // Home navigation — replace "/" with your app's root
+    document.getElementById("homeBtn").addEventListener("click", () => {
+      window.location.href = "/";
+    });
+
+    // Retry: simulate a refresh/ping
+    document.getElementById("retryBtn").addEventListener("click", () => {
+      // Visual feedback
+      const btn = document.getElementById("retryBtn");
+      btn.disabled = true;
+      btn.textContent = "Reconnecting…";
+      btn.style.borderColor = "rgba(42,252,152,0.6)";
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = "Retry request";
+        btn.style.borderColor = "rgba(51,225,255,0.3)";
+        // Simple refresh
+        location.reload();
+      }, 900);
+    });
+
+    // Links: wire to your routes
+    document.getElementById("docsLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      // Replace with your docs URL or route
+      window.location.href = "/docs";
+    });
+    document.getElementById("supportLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      // Replace with your support URL or route
+      window.location.href = "/support";
+    });
+
+    // Interactive: toggle glitch and pulse via keyboard
+    const codeEl = document.querySelector(".code");
+    let glitchEnabled = true;
+    let pulseEnabled = false;
+
+    function setGlitch(on) {
+      glitchEnabled = on;
+      codeEl.style.animation = on ? "" : "none";
+      codeEl.style.textShadow = on ? "var(--glow)" : "0 0 0 rgba(0,0,0,0)";
+    }
+
+    function setPulse(on) {
+      pulseEnabled = on;
+      if (on) {
+        codeEl.animate(
+          [
+            { filter: "brightness(1) saturate(1)" },
+            { filter: "brightness(1.3) saturate(1.2)" },
+            { filter: "brightness(1) saturate(1)" }
+          ],
+          { duration: 1200, iterations: Infinity }
+        );
+      } else {
+        // Cancel all animations
+        codeEl.getAnimations().forEach(a => a.cancel());
+      }
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key.toLowerCase() === "g") setGlitch(!glitchEnabled);
+      if (e.code === "Space") {
+        e.preventDefault();
+        setPulse(!pulseEnabled);
+      }
+    });
+
+    // Mouse parallax on the neon frame (subtle)
+    const shell = document.querySelector(".shell");
+    window.addEventListener("mousemove", (e) => {
+      const { innerWidth: w, innerHeight: h } = window;
+      const rx = (e.clientX / w - 0.5) * 2; // -1 .. 1
+      const ry = (e.clientY / h - 0.5) * 2;
+      shell.style.transform = `translate3d(${rx * 6}px, ${ry * 4}px, 0)`;
+    });
+    window.addEventListener("mouseleave", () => {
+      shell.style.transform = "translate3d(0,0,0)";
+    });
+
+    // Respect reduced motion
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function toggleMotion(e) {
+      const grid = document.querySelector(".grid");
+      grid.style.animationPlayState = e.matches ? "paused" : "running";
+      if (e.matches) {
+        setGlitch(false);
+        setPulse(false);
+      } else {
+        setGlitch(true);
+      }
+    }
+    mq.addEventListener("change", toggleMotion);
+    toggleMotion(mq);
+  </script>
+</body>
+</html>
