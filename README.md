@@ -1,1 +1,1 @@
-https://prasadtk.pages.dev
+https://prasadtk.github.io
