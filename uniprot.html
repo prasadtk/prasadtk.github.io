@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>UniProt Domains & PDB Mappings</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9fafb; }
+    h1 { color: #2563eb; }
+    input, button { padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #2563eb; color: white; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    .result { margin-top: 20px; padding: 15px; background: #fff; border: 1px solid #ddd; border-radius: 6px; }
+    .domain, .pdb { margin: 6px 0; padding: 6px; border-left: 4px solid #2563eb; background: #e0f2fe; }
+    .pdb { border-left-color: #10b981; background: #d1fae5; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>UniProt Domain & PDB Finder</h1>
+
+  <input id="query" placeholder="Protein/Gene (e.g., TP53)">
+  <input id="organism" placeholder="Organism (e.g., Homo sapiens)">
+  <button onclick="searchUniProt()">Search</button>
+
+  <div id="result" class="result"></div>
+
+<script>
+async function searchUniProt() {
+  const q = document.getElementById("query").value.trim();
+  const org = document.getElementById("organism").value.trim();
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = "Searching…";
+
+  if (!q) { resultDiv.innerHTML = "Please enter a protein or gene name."; return; }
+
+  try {
+    // Step 1: Search UniProt for accession
+    const searchUrl = `https://rest.uniprot.org/uniprotkb/search?query=${encodeURIComponent(q)}${org ? '+AND+organism:"'+org+'"' : ''}&fields=accession,protein_name,organism_name&format=json&size=1`;
+    const res = await fetch(searchUrl);
+    const data = await res.json();
+    if (!data.results || data.results.length === 0) {
+      resultDiv.innerHTML = "No results found.";
+      return;
+    }
+    const acc = data.results[0].primaryAccession;
+
+    // Step 2: Fetch full UniProt entry for domains
+    const entryRes = await fetch(`https://rest.uniprot.org/uniprotkb/${acc}.json`);
+    const entry = await entryRes.json();
+    const proteinName = entry.proteinDescription?.recommendedName?.fullName?.value || acc;
+    const organismName = entry.organism?.scientificName || "—";
+    const domains = entry.features?.filter(f => f.type === "DOMAIN") || [];
+
+    let html = `<h3>${proteinName} (${acc})</h3><p><b>Organism:</b> ${organismName}</p>`;
+    if (domains.length > 0) {
+      html += "<h4>Domain Boundaries:</h4>";
+      domains.forEach(d => {
+        html += `<div class="domain">${d.description || "Domain"}: ${d.location.start.value} – ${d.location.end.value}</div>`;
+      });
+    } else {
+      html += "<p>No domain annotations available.</p>";
+    }
+
+    // Step 3: Fetch PDBe mapping for PDB IDs
+    const pdbRes = await fetch(`https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/${acc}`);
+    const pdbMap = await pdbRes.json();
+    const entryMap = pdbMap[acc];
+    if (entryMap && entryMap.pdbs) {
+      html += "<h4>PDB Structures:</h4>";
+      for (const pdbId in entryMap.pdbs) {
+        const chains = entryMap.pdbs[pdbId].chains;
+        chains.forEach(chain => {
+          chain.mappings.forEach(m => {
+            html += `<div class="pdb">
+              <a href="https://www.rcsb.org/structure/${pdbId}" target="_blank">${pdbId}</a> 
+              Chain ${chain.chain_id}: UniProt ${m.unp_start}-${m.unp_end} → PDB ${m.start.residue_number}-${m.end.residue_number}
+            </div>`;
+          });
+        });
+      }
+    } else {
+      html += "<p>No PDB mappings available.</p>";
+    }
+
+    resultDiv.innerHTML = html;
+  } catch (err) {
+    console.error(err);
+    resultDiv.innerHTML = "Error fetching data.";
+  }
+}
+</script>
+</body>
+</html>
