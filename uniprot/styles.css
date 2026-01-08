@@ -1,23 +1,122 @@
-.muted { color: #666; }
-.link { color: #0d6efd; text-decoration: none; }
-.link:hover { text-decoration: underline; }
-.pdb-group { margin-bottom: 8px; }
-.spinner {
-  display: inline-block;
-  width: 1rem; height: 1rem;
-  border: 2px solid #ccc; border-top-color: #0d6efd; border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-left: 6px;
+/* ===== Global Reset & Base ===== */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8f9fa; /* light neutral background */
+  color: #212121; /* carbon text */
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-pre { margin: 0; }
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: #1b1b1b;
+}
+
+/* Links */
+.link {
+  color: #00695c; /* teal accent */
+  text-decoration: none;
+  font-weight: 500;
+}
+.link:hover {
+  color: #004d40;
+  text-decoration: underline;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+  background-color: #00695c; /* teal */
+  border-color: #00695c;
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #004d40;
+  border-color: #004d40;
+}
+
+.btn-info {
+  background-color: #ff9800; /* orange accent */
+  border-color: #ff9800;
+  color: #fff;
+}
+.btn-info:hover {
+  background-color: #e68900;
+  border-color: #e68900;
+}
 
 .btn-domain {
-  background-color: #212121;
+  background-color: #212121; /* carbon black */
   border-color: #212121;
   color: #fff;
 }
 .btn-domain:hover {
   background-color: #000000;
   border-color: #000000;
+}
+
+/* ===== Table ===== */
+.table {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.table th {
+  background-color: #e0f2f1; /* subtle teal header */
+  color: #004d40;
+  font-weight: 600;
+}
+.table td {
+  vertical-align: middle;
+}
+
+/* ===== Modal ===== */
+.modal-content {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.modal-header {
+  background-color: #00695c;
+  color: #fff;
+}
+.modal-title {
+  font-weight: 600;
+}
+.modal-body {
+  background-color: #fafafa;
+}
+
+/* ===== Autocomplete List ===== */
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #e0f2f1;
+  color: #004d40;
+}
+
+/* ===== Utility ===== */
+.muted {
+  color: #757575;
+}
+.pdb-group {
+  margin-bottom: 8px;
+}
+.spinner {
+  display: inline-block;
+  width: 1rem; height: 1rem;
+  border: 2px solid #ccc;
+  border-top-color: #00695c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+pre {
+  margin: 0;
+  font-family: Consolas, monospace;
+  background-color: #f1f1f1;
+  padding: 8px;
+  border-radius: 4px;
 }
