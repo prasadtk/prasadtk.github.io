@@ -8,6 +8,8 @@ body {
   padding: 0;
 }
 
+
+
 /* Headings */
 h1, h2, h3, h4 {
   font-weight: 600;
@@ -70,6 +72,13 @@ h1, h2, h3, h4 {
   vertical-align: middle;
 }
 
+.table-responsive {
+  margin-top: 0 !important; /* remove extra spacing */
+}
+.table td { vertical-align: top !important; }
+
+
+
 /* ===== Modal ===== */
 .modal-content {
   border-radius: 6px;
@@ -120,3 +129,4 @@ pre {
   padding: 8px;
   border-radius: 4px;
 }
+
