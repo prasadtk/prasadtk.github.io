@@ -40,20 +40,20 @@
   object-fit: cover;
 }
 
-.container {
-      display: flex;
-      align-items: flex-start; /* Align items at the top */
-      gap: 20px; /* Space between text and image */
-    }
+.container { 
+	display: flex; 
+	justify-content: space-between; /* Push text left, image right */ 
+	align-items: flex-start; /* Align items at the top */ }
     .text {
       flex: 1; /* Take available space */
     }
     .image {
-      flex: 1;
+      flex: 0;
     }
     img {
-      max-width: 100%;
-      height: auto;
+	max-width: 60px; /* Control image size */ 
+	height: auto; 
+	display: block;
     }
 
 /* Dark theme (default) */
