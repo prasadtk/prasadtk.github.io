@@ -40,6 +40,22 @@
   object-fit: cover;
 }
 
+.container {
+      display: flex;
+      align-items: flex-start; /* Align items at the top */
+      gap: 20px; /* Space between text and image */
+    }
+    .text {
+      flex: 1; /* Take available space */
+    }
+    .image {
+      flex: 1;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
 /* Dark theme (default) */
 :root {
   --profile-bg: #404040; /* dark background */
