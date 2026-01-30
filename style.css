@@ -1,26 +1,63 @@
+/* Default theme (dark) */
 :root {
-	--background-color: #121212;
-	--text-color: #f5f5f5;
-	--link-color: #d9b32b;
-	--light-color: #383838;
-	--border-color: #333333;
-	--code-background: #2d2d2d;
-	--blockquote-background: #1f1f1f;
-	--limk-hover-color: #d94e2b;
-	--light-hover-color: #a6a6a6;
+  --background-color: #121212;
+  --text-color: #f5f5f5;
+  --link-color: #d9b32b;
+  --light-color: #383838;
+  --border-color: #333333;
+  --code-background: #2d2d2d;
+  --blockquote-background: #1f1f1f;
+  --limk-hover-color: #d94e2b;
+  --light-hover-color: #a6a6a6;
+
+  /* image path variable */
+  --profile-img: url("profile-d.png");
 }
 
 [data-theme="light"] {
-	--background-color: #ffffff;
-	--text-color: #000000;
-	--link-color: #7F4304;
-	--light-color: #F0F0F0;
-	--border-color: #eaecef;
-	--code-background: #f6f8fa;
-	--blockquote-background: #f0f0f0;
-	--limk-hover-color: #7f3b04;
-	--light-hover-color: #a6a6a6;
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #7F4304;
+  --light-color: #F0F0F0;
+  --border-color: #eaecef;
+  --code-background: #f6f8fa;
+  --blockquote-background: #f0f0f0;
+  --limk-hover-color: #7f3b04;
+  --light-hover-color: #a6a6a6;
+
+  /* swap image path */
+  --profile-img: url("profile-l.png");
 }
+
+/* Apply the variable to the image */
+.profile-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  content: var(--profile-img);
+}
+
+
+
+/* Default dark theme */
+[data-theme="light"] .profile-img {
+  content: url("profile-l.png");
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* light theme */
+[data-theme="dark"] .profile-img {
+  content: url("profile-dark.png");
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 
 /* Make specific adjustments for body and other elements in light mode */
 [data-theme="light"] body {
@@ -304,4 +341,5 @@ th {
 
 #goToTop:hover {
 	background-color: #808080;
+
 }
