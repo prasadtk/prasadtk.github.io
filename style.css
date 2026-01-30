@@ -9,6 +9,9 @@
   --blockquote-background: #1f1f1f;
   --limk-hover-color: #d94e2b;
   --light-hover-color: #a6a6a6;
+
+  /* image path variable */
+  --profile-img: url("profile-d.png");
 }
 
 [data-theme="light"] {
@@ -21,50 +24,40 @@
   --blockquote-background: #f0f0f0;
   --limk-hover-color: #7f3b04;
   --light-hover-color: #a6a6a6;
+
+  /* swap image path */
+  --profile-img: url("profile-l.png");
 }
 
 /* Apply the variable to the image */
-.profile-wrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--profile-bg);
-}
-
 .profile-img {
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
+  border-radius: 50%;
+  content: var(--profile-img);
 }
 
-.container { 
-	display: flex; 
-	justify-content: space-between; /* Push text left, image right */ 
-	align-items: flex-start; /* Align items at the top */ }
-    .text {
-      flex: 1; /* Take available space */
-    }
-    .image {
-      flex: 0;
-    }
-    img {
-	max-width: 40px; /* Control image size */ 
-	height: auto; 
-	display: block;
-    }
 
-/* Dark theme (default) */
-:root {
-  --profile-bg: #404040; /* dark background */
+
+/* Default dark theme */
+[data-theme="light"] .profile-img {
+  content: url("profile-l.png");
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-/* Light theme */
-:root[data-theme="light"] {
-  --profile-bg: #f0f0f0; /* light background */
+/* light theme */
+[data-theme="dark"] .profile-img {
+  content: url("profile-dark.png");
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
+
 
 /* Make specific adjustments for body and other elements in light mode */
 [data-theme="light"] body {
