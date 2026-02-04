@@ -1,6 +1,7 @@
 /* Default theme (dark) */
 :root {
-  --background-color: #121212;
+  --background-color: #32312d;
+/*  --background-color: #121212;*/
   --text-color: #f5f5f5;
   --link-color: #d9b32b;
   --light-color: #383838;
