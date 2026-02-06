@@ -39,14 +39,26 @@
                 content.style.display = 'none';
             }
         }
-                function toggleContent2() {
-            const content = document.getElementById('hiddenContent2');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
-            }
-        }
+
+        
+function toggleContent2() {
+    const content = document.getElementById("hiddenContent2");
+    const button = document.querySelector(".toggle-button2");
+
+    if (content.style.display === "none" || content.style.display === "") {
+        content.style.display = "block";
+        button.textContent = "Show Less";
+    } else {
+        content.style.display = "none";
+        button.textContent = "Show More";
+    }
+}
+
+
+
+
+
+        
                 function toggleContent3() {
             const content = document.getElementById('hiddenContent3');
             if (content.style.display === 'none' || content.style.display === '') {
