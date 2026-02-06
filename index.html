@@ -31,42 +31,46 @@
                 content.style.display = 'none';
             }
         }
-                function toggleContent1() {
-            const content = document.getElementById('hiddenContent1');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
+
+        function toggleContent1() {
+            const content = document.getElementById("hiddenContent1");
+            const button = document.querySelector(".toggle-button1");
+        
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                button.textContent = "Show Less";
             } else {
-                content.style.display = 'none';
+                content.style.display = "none";
+                button.textContent = "Show More";
             }
         }
-
+                     
+        function toggleContent2() {
+            const content = document.getElementById("hiddenContent2");
+            const button = document.querySelector(".toggle-button2");
         
-function toggleContent2() {
-    const content = document.getElementById("hiddenContent2");
-    const button = document.querySelector(".toggle-button2");
-
-    if (content.style.display === "none" || content.style.display === "") {
-        content.style.display = "block";
-        button.textContent = "Show Less";
-    } else {
-        content.style.display = "none";
-        button.textContent = "Show More";
-    }
-}
-
-
-
-
-
-        
-                function toggleContent3() {
-            const content = document.getElementById('hiddenContent3');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                button.textContent = "Show Less";
             } else {
-                content.style.display = 'none';
+                content.style.display = "none";
+                button.textContent = "Show More";
             }
         }
+        
+        function toggleContent3() {
+            const content = document.getElementById("hiddenContent3");
+            const button = document.querySelector(".toggle-button3");
+        
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                button.textContent = "Show Less";
+            } else {
+                content.style.display = "none";
+                button.textContent = "Show More";
+            }
+        }
+        
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'light') {
@@ -153,7 +157,7 @@ This integrated strategy bridges experimental and computational disciplines, ena
     Associate Director (Structural Biology)<br> <a href="https://www.syngeneintl.com/solutions/discovery-biology/protein-sciences/" target="blank">Discovery Biology</a>, <a href="https://www.syngeneintl.com" target="blank">Syngene International Limited</a>, Bangalore, India <br> 2025-Present<br> <br>
     Research Scientist (Drug discovery) <br>  <a href="https://www.instem.res.in/ccbt" target="blank">Centre for Chemical Biology and Therapeutics</a>, <a href="https://www.instem.res.in/" target="blank">Institute for Stem Cell Biology and Regenerative Medicine</a>, Bangalore, India <br> 2018 - 2025<br>
     <button style="float: right" class="toggle-button1" onclick="toggleContent1()">Show More</button> <br>
-        <div id="hiddenContent1" class="hidden-content">
+        <div id="hiddenContent1" class="hidden-content" style="display:none;" >
              Post-Doc (Protein crystallography, Biophysics, Molecular biology) <br>
              <a href="https://iisc.ac.in" target="blank">Indian Institute of Science</a>, <a href="http://mbu.iisc.ac.in" target="blank">Molecular Biophysics Unit</a>, Bangalore, India <br> 2014 - 2017 <br> <br>
              Post-Doc (Inorganic, Organic synthesis, Supramolecular chemistry) <br>
@@ -181,7 +185,7 @@ This integrated strategy bridges experimental and computational disciplines, ena
         <li>S. Jos, N. Shivanandaswamy, A. Sharma, T. K. Prasad, R. Kashyap, N. Kamariah, M. M. S. Bharath, D. Sharma, S. Nath, B. Padmanabhan, S. Padavattan, Parkinson’s disease-specific α-Synuclein variants potentially drive Lewy body formation by engaging in promiscuous and non-functional interactions. &nbsp;<a href="https://doi.org/10.1038/s42003-025-09395-9" target="blank"><i>Communications Biology</i> 2026, <i>0</i>, 0.</a></li>
     </ul>
     <button style="float: right" class="toggle-button3" onclick="toggleContent3()">Show More</button> <br>
-    <div id="hiddenContent3" class="hidden-content">    
+    <div id="hiddenContent3" class="hidden-content" style="display:none;">    
     <ul>    
         <li>S. Jos, A. Kambaru, T. K. Prasad, S. Parthasarathi, N. Kamariah, S. Nath, B. Padmanabhan, S. Padavattan, Structural and functional insights into the nuclear role of Parkinson’s disease-associated α-synuclein as a histone chaperone. &nbsp;<a href="https://doi.org/10.1038/s42003-025-08138-0" target="blank"><i>Communications Biology</i> 2025, <i>8</i>, 712.</a></li>
         <li>V. Kumar, P. K. Chunchagatta Lakshman, T. K. Prasad, K. Manjunath, S. Bairy, A. S. Vasu, B. Ganavi, S. Jasti, N. Kamariah, Target-based drug discovery: Applications of fluorescence techniques in high throughput and fragment-based screening. &nbsp;<a href="https://doi.org/10.1016/j.heliyon.2023.e23864" target="blank"><i>Heliyon</i> 2024, <i>10</i>, e23864.</a></li>
