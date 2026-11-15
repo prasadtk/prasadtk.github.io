@@ -89,3 +89,31 @@ svg { width: 100%; height: auto; background: var(--bg); border: 1px solid var(--
 .step-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 13px; font-size: 0.86rem; }
 .step-box strong { color: var(--peach); display: block; margin-bottom: 4px; font-size: 0.92rem; }
 .eq-pill { display: inline-block; background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; font-family: monospace; font-size: 0.82rem; color: var(--teal); margin-top: 6px; }
+
+/* ===== Added from stylex.css ===== */
+
+input[type="range"] {
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+
+.b-peach {
+  background: rgba(246,178,139,0.18);
+  color: var(--peach);
+}
+
+.step-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 0.86rem;
+}
+
+.step-box strong {
+  color: var(--peach);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.92rem;
+}
+
