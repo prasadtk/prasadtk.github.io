@@ -93,11 +93,13 @@
 
       <div class="row-2">
         <div class="field">
-          <label>Base Assoc. Rate k<sub>a</sub> (@ 25°C)</label>
+          <label>  Base Assoc. Rate k<sub>a</sub> (@ 25°C):
+  <span id="val-ka" style="color:var(--teal);">1.0 × 10⁵ M⁻¹s⁻¹</span></label>
           <input id="input-ka" type="range" min="0.1" max="5.0" step="0.1" value="1.0" oninput="updateSimulation()">
         </div>
         <div class="field">
-          <label>Base Dissoc. Rate k<sub>d</sub> (@ 25°C)</label>
+          <label>Base Dissoc. Rate k<sub>d</sub> (@ 25°C):
+  <span id="val-kd" style="color:var(--teal);">1.0 × 10⁻³ s⁻¹</span></label>
           <input id="input-kd" type="range" min="0.1" max="10.0" step="0.2" value="1.0" oninput="updateSimulation()">
         </div>
       </div>
@@ -135,6 +137,22 @@
         <text id="label-phase-1" x="120" y="58" fill="var(--teal)" font-size="9" font-family="monospace">▶ Association Phase (Injection)</text>
         <text id="label-phase-2" x="330" y="58" fill="var(--orange)" font-size="9" font-family="monospace">■ Dissociation Wash</text>
         <text x="30" y="160" fill="var(--muted)" font-size="9" font-family="monospace" transform="rotate(-90 30 160)">Response (RU)</text>
+	<text x="315" y="320" fill="var(--muted)" font-size="9" font-family="monospace" text-anchor="middle">Time (s) </text>
+
+
+<!-- X-axis ticks -->
+<text x="60"  y="295" fill="var(--muted)" font-size="8">0</text>
+<text x="185" y="295" fill="var(--muted)" font-size="8">100</text>
+<text x="315" y="295" fill="var(--muted)" font-size="8">200</text>
+<text x="440" y="295" fill="var(--muted)" font-size="8">300</text>
+<text x="560" y="295" fill="var(--muted)" font-size="8">400</text>
+
+<!-- Y-axis ticks -->
+<text x="40" y="280" fill="var(--muted)" font-size="8">0</text>
+<text x="40" y="220" fill="var(--muted)" font-size="8">50</text>
+<text x="40" y="160" fill="var(--muted)" font-size="8">100</text>
+<text x="40" y="100" fill="var(--muted)" font-size="8">150</text>
+<text x="40" y="40"  fill="var(--muted)" font-size="8">200</text>
       </svg>
     </div>
   </div>
@@ -256,6 +274,15 @@ function updateSimulation() {
   const Ea_R = 6000;
   const arrheniusFactor = Math.exp(-Ea_R * ((1 / T_K) - (1 / T_ref)));
   const diffusionFactor = (T_K / T_ref) * (1.0 / eta);
+
+const kaSlider = parseFloat(document.getElementById('input-ka').value);
+const kdSlider = parseFloat(document.getElementById('input-kd').value);
+
+document.getElementById('val-ka').innerHTML =
+    kaSlider.toFixed(1) + ' × 10⁵ M⁻¹s⁻¹';
+
+document.getElementById('val-kd').innerHTML =
+    kdSlider.toFixed(1) + ' × 10⁻³ s⁻¹';
 
   const baseKa = parseFloat(document.getElementById('input-ka').value) * 1e5;
   const baseKd = parseFloat(document.getElementById('input-kd').value) * 1e-3;
