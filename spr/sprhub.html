@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPR Hub — Surface Plasmon Resonance Assay & Kinetics Suite</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <h1>SPR<span class="badge b-olive">Hub</span></h1>
+      <p>Surface Plasmon Resonance Kinetics, PROTAC Cooperativity, Reusable Chips, Buffers &amp; Diagnostics</p>
+    </div>
+    <div class="actions">
+      <button class="btn" id="themeBtn" onclick="toggleTheme()">Light Mode</button>
+      <button class="btn btn-teal" onclick="exportCSV()">Export Run Sheet (.CSV)</button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab(0, this)">1. Rmax, KD &amp; PROTAC Calculators</button>
+    <button class="tab" onclick="showTab(1, this)">2. Sensor Chip Matrix &amp; Reusable Surfaces</button>
+    <button class="tab" onclick="showTab(2, this)">3. Regeneration &amp; Elution</button>
+    <button class="tab" onclick="showTab(3, this)">4. Curve Diagnostics (10 Models)</button>
+    <button class="tab" onclick="showTab(4, this)">5. Checklists &amp; Buffer Formulations</button>
+  </div>
+
+  <!-- TAB 1: CALCULATORS -->
+  <div class="panel active" id="tab-0">
+    <div class="card" style="padding: 14px 18px;">
+      <div class="row-3">
+        <div class="field" style="margin:0;"><label>Experiment / Project ID</label><input type="text" id="metaExp" value="SPR-2026-001"></div>
+        <div class="field" style="margin:0;"><label>Target Ligand Name</label><input type="text" id="metaLigand" value="Target Protein / mAb"></div>
+        <div class="field" style="margin:0;"><label>Instrument Platform</label>
+          <select id="metaInst">
+            <option value="Biacore (8K / S200 / T200)">Biacore (8K / S200 / T200)</option>
+            <option value="Carterra LSA">Carterra LSA</option>
+            <option value="Nicoya OpenSPR">Nicoya OpenSPR</option>
+            <option value="General SPR Platform">General SPR Platform</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2> <span>Bidirectional R<sub>max</sub> Calculator</span> <span class="badge b-peach">Immobilization</span></h2>
+        <div class="presets">
+          <button class="btn btn-sm" onclick="setRmaxPreset(50000, 250, 30)">Fragment (250 Da)</button>
+          <button class="btn btn-sm" onclick="setRmaxPreset(50000, 450, 40)">Small Mol (450 Da)</button>
+          <button class="btn btn-sm" onclick="setRmaxPreset(50000, 800, 45)">PROTAC (800 Da)</button>
+          <button class="btn btn-sm" onclick="setRmaxPreset(150000, 15000, 40)">Nanobody (15 kDa)</button>
+          <button class="btn btn-sm" onclick="setRmaxPreset(150000, 25000, 50)">IgG + Antigen</button>
+        </div>
+        <div class="field">
+          <label>Calculation Mode</label>
+          <select id="rmaxMode" onchange="calcAll()">
+            <option value="ligand">Solve for Target R_ligand (from Desired R_max)</option>
+            <option value="rmax">Solve for Expected R_max (from Immobilized R_ligand)</option>
+          </select>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>Ligand MW (Da — Chip)</label><input type="number" id="mwL" value="150000" oninput="calcAll()"></div>
+          <div class="field"><label>Analyte MW (Da — Flow)</label><input type="number" id="mwA" value="25000" oninput="calcAll()"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>Desired R<sub>max</sub> / Immobilized R<sub>ligand</sub> (RU)</label><input type="number" id="inputRU" value="50" oninput="calcAll()"></div>
+          <div class="field"><label>Binding Valency (Sites/Ligand)</label><input type="number" id="valency" value="1" oninput="calcAll()"></div>
+        </div>
+        <div class="field"><label>Expected Surface Activity (%)</label><input type="number" id="activity" value="70" oninput="calcAll()"></div>
+        <div class="result-box">
+          <div class="result-val" id="resRmaxMain">429 RU (Target R_ligand)</div>
+          <div class="result-sub" id="resRmaxSub">Theoretical 100% active R_ligand: 300 RU • Adjusted for 70% activity</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Kinetic Constants &amp; Serial Dilution <span class="badge b-teal">1:1 &amp; Steady-State</span></h2>
+        <div class="row-2">
+          <div class="field"><label>Association Rate k<sub>a</sub> (M⁻¹ s⁻¹)</label><input type="number" id="ka" value="100000" oninput="calcAll()"></div>
+          <div class="field"><label>Dissociation Rate k<sub>d</sub> (s⁻¹)</label><input type="number" id="kd" value="0.001" step="0.0001" oninput="calcAll()"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>Top Concentration (nM)</label><input type="number" id="topConc" value="100" oninput="calcAll()"></div>
+          <div class="field"><label>Dilution Factor</label>
+            <select id="dilFactor" onchange="calcAll()">
+              <option value="2">2-fold (1:1)</option>
+              <option value="3">3-fold (1:2)</option>
+              <option value="5">5-fold (1:4)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Final Volume per Tube (µL)</label><input type="number" id="tubeVol" value="200" oninput="calcAll()"></div>
+        <div class="result-box">
+          <div class="result-val" id="resKD">K_D = 10.00 nM</div>
+          <div class="result-sub" id="resHalfLife">Complex Half-Life (t1/2): 11.6 min • Recommended Range: 1.0 – 100.0 nM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Serial Dilution Bench Planner</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tube</th><th>Target Conc (nM)</th><th>Fractional Occupancy (θ)</th><th>Pipetting Instruction</th></tr></thead>
+          <tbody id="dilutionTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>Ternary Complex / PROTAC Cooperativity (α) <span class="badge b-teal" id="alphaBadge">Positive</span></h2>
+        <div class="row-2">
+          <div class="field"><label>Binary K<sub>D</sub> (POI + PROTAC, nM)</label><input type="number" id="binKD" value="50" oninput="calcAll()"></div>
+          <div class="field"><label>Ternary K<sub>D</sub> (POI + PROTAC·E3, nM)</label><input type="number" id="terKD" value="10" oninput="calcAll()"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>E3 Binary K<sub>D</sub> (nM)</label><input type="number" id="e3KD" value="40" oninput="calcAll()"></div>
+          <div class="field"><label>Saturating [E3] in Flow (nM)</label><input type="number" id="e3Conc" value="500" oninput="calcAll()"></div>
+        </div>
+        <div class="result-box" style="border-left-color: var(--olive);">
+          <div class="result-val" style="color: var(--olive);" id="resAlpha">α = 5.00×</div>
+          <div class="result-sub" id="resDDG">ΔΔG = -0.95 kcal/mol at 25°C • Hook Peak at ~20.0 nM PROTAC</div>
+        </div>
+        <svg id="hookSvg" viewBox="0 0 440 160"></svg>
+      </div>
+
+      <div class="card">
+        <h2>DMSO Solvent Correction Curve <span class="badge b-orange">Excluded Volume</span></h2>
+        <div class="row-2">
+          <div class="field"><label>Running Buffer DMSO (%)</label><input type="number" id="dmsoTarget" value="2.0" step="0.1" oninput="calcAll()"></div>
+          <div class="field"><label>Excluded Volume Slope (RU/RU)</label><input type="number" id="dmsoSlope" value="-0.015" step="0.001" oninput="calcAll()"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>Sample Raw (Fc2 - Fc1) (RU)</label><input type="number" id="sampleRaw" value="18.5" step="0.5" oninput="calcAll()"></div>
+          <div class="field"><label>Sample Reference Fc1 Bulk (RU)</label><input type="number" id="sampleFc1" value="2520" oninput="calcAll()"></div>
+        </div>
+        <div class="result-box" style="border-left-color: var(--orange);">
+          <div class="result-val" style="color: var(--orange);" id="resDmsoCorr">Corrected Response: +56.3 RU</div>
+          <div class="result-sub" id="resDmsoSub">Interpolated Offset: -37.8 RU at Fc1 = 2520 RU (Target 2.0% DMSO)</div>
+        </div>
+        <svg id="dmsoSvg" viewBox="0 0 440 160"></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: SENSOR CHIPS & REUSABLE SURFACES -->
+  <div class="panel" id="tab-1">
+    <div class="card">
+      <h2>Sensor Chip Selection Matrix (Including Reusable &amp; Strippable Surfaces)</h2>
+      <div class="presets">
+        <button class="btn btn-sm btn-chip active" onclick="filterChips('all', this)">All Chips (15)</button>
+        <button class="btn btn-sm btn-chip" onclick="filterChips('reusable', this)">Reusable / Reversible Capture</button>
+        <button class="btn btn-sm btn-chip" onclick="filterChips('covalent', this)">Covalent (Amine/Thiol)</button>
+        <button class="btn btn-sm btn-chip" onclick="filterChips('affinity', this)">Affinity Capture</button>
+        <button class="btn btn-sm btn-chip" onclick="filterChips('lipid', this)">Lipid / Membrane</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Chip Type</th><th>Reusability</th><th>Surface Matrix</th><th>Coupling / Capture</th><th>Best Suited Ligands &amp; Stripping Protocol</th></tr></thead>
+          <tbody id="chipTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Reusable Chip Regeneration &amp; Re-Capture Cycles</h2>
+      <div class="grid-3">
+        <div class="step-box"><strong>Biotin CAPture Chip (ssDNA Hybridization)</strong>Overcomes irreversible Streptavidin (SA) binding. Hybridize Biotin-CAPture reagent (ssDNA-SA), capture biotinylated ligand, run analyte, and strip completely with 6 M Guanidine-HCl + 0.25 M NaOH for 100+ fresh ligand cycles.</div>
+        <div class="step-box"><strong>NTA &amp; Tris-NTA Chips (Ni²⁺ / Co²⁺ Chelation)</strong>Captures 6x–10xHis-tagged proteins gently at neutral pH. Strip old/denatured ligand with 350 mM EDTA (pH 8.3), wash, and recharge with 0.5 mM NiCl₂ (or CoCl₂ for higher stability) before capturing fresh ligand.</div>
+        <div class="step-box"><strong>Anti-His / Anti-GST / Anti-Human Fc Capture</strong>Covalently immobilize high-affinity capture antibodies (e.g., anti-His mAb or anti-human IgG Fc) on CM5/CM4. Capture fresh tagged ligand every cycle and regenerate the capture antibody with 10 mM Glycine-HCl pH 1.5–2.0.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Immobilization Coupling Chemistries Reference</h2>
+      <div class="grid-2">
+        <div class="step-box"><strong>Amine Coupling (EDC / NHS)</strong>Targets primary amines (-NH₂ on Lysine/N-terminus). Activate with 0.4 M EDC + 0.1 M NHS (7 min), inject ligand in 10 mM Sodium Acetate at pH 4.0–5.5 (0.5–1.0 units below ligand pI), block with 1 M Ethanolamine-HCl pH 8.5.</div>
+        <div class="step-box"><strong>Thiol / Ligand-Thiol Coupling (PDEA)</strong>Targets free cysteines (-SH) or introduces reactive disulfides via PDEA. Ideal for site-directed orientation of engineered Cys-mutants; block with 50 mM L-Cysteine + 1 M NaCl pH 4.3.</div>
+        <div class="step-box"><strong>Aldehyde / Hydrazide Coupling</strong>Oxidize cis-diols on glycoproteins with 10 mM NaIO₄, activate surface with 5 mM Carbohydrazide, couple at pH 4.0–4.5, and stabilize hydrazone bonds with 0.1 M NaCNBH₃.</div>
+        <div class="step-box"><strong>Click Chemistry (DBCO–Azide / Maleimide)</strong>Copper-free strain-promoted azide-alkyne cycloaddition (SPAAC) at neutral pH 6.5–7.5 for ultra-gentle, homogeneous site-specific immobilization.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: REGENERATION -->
+  <div class="panel" id="tab-2">
+    <div class="card">
+      <h2>Systematic Regeneration Scouting Ladder</h2>
+      <div class="grid-3">
+        <div class="step-box"><strong>Step 1: Start Mild</strong>Inject short (15–30 s) pulses at 30 µL/min of 10 mM Glycine-HCl pH 3.0 or 1 M NaCl. Check for &lt;5 RU baseline drift and &gt;90% binding retention.</div>
+        <div class="step-box"><strong>Step 2: Escalate or Combine</strong>Step down pH (2.5 → 2.0 → 1.5) or switch to multi-component cocktails (ionic + chaotropic + mild detergent) rather than harsh single acids.</div>
+        <div class="step-box"><strong>Step 3: Single-Cycle Kinetics (SCK)</strong>If no regeneration preserves ligand activity, inject 5 ascending analyte concentrations sequentially without regeneration and fit with an SCK model.</div>
+      </div>
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <thead><tr><th>Category</th><th>Reagent / Cocktail Formulation</th><th>Pulse</th><th>Mechanism &amp; Target</th><th>Precautions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Acidic Ladder</strong></td><td>10 mM Glycine-HCl (pH 3.0 → 2.5 → 2.0 → 1.5)</td><td>15–30 s</td><td>Protonates acidic residues; standard for Ab–Ag.</td><td>Prolonged exposure &lt; pH 2.0 may denature fragile folds.</td></tr>
+            <tr><td><strong>Basic Ladder</strong></td><td>10–50 mM NaOH (pH 11.5–12.5)</td><td>15–30 s</td><td>Deprotonates basic residues; ideal for DNA/RNA chips.</td><td>Avoid on non-stabilized NHS-ester surfaces.</td></tr>
+            <tr><td><strong>High Ionic / Mild</strong></td><td>1.0–4.0 M NaCl or 2.0–3.0 M MgCl₂ (pH 7.0)</td><td>30–60 s</td><td>Disrupts electrostatic bonds at neutral pH.</td><td>High refractive index jump; add extra buffer wash.</td></tr>
+            <tr><td><strong>Chaotropic / Organic</strong></td><td>50% Ethylene Glycol or 10–20% DMSO / Ethanol</td><td>30 s</td><td>Disrupts hydrophobic interactions in small molecules.</td><td>Incompatible with intact lipid bilayers (L1/HPA).</td></tr>
+            <tr><td><strong>Mild Cocktail A</strong></td><td>1 M NaCl + 10 mM Glycine pH 2.5 + 0.05% P20</td><td>20–30 s</td><td>Combined ionic, acidic, and surfactant elution.</td><td>Allows higher pH (2.5 vs 1.5) for full dissociation.</td></tr>
+            <tr><td><strong>Metal-Dependent</strong></td><td>10–50 mM EDTA in HBS-N (pH 7.4)</td><td>30–60 s</td><td>Dissociates Ca²⁺/Mg²⁺-dependent complexes.</td><td>Re-equilibrate with metal-supplemented buffer.</td></tr>
+            <tr><td><strong>Reusable Chip Strip</strong></td><td>CAP: 6M Gua-HCl + 0.25M NaOH | NTA: 350mM EDTA | L1: 20mM CHAPS</td><td>60 s</td><td>Strips reversible capture surface for fresh ligand reload.</td><td>Recharge NTA with 0.5 mM NiCl₂; re-hybridize CAP ssDNA.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: CURVE DIAGNOSTICS -->
+  <div class="panel" id="tab-3">
+    <div class="card">
+      <h2>Visual Sensorgram Curve Diagnostics &amp; Kinetic Models (10 Models)</h2>
+      <div class="presets" id="modelBtns"></div>
+      <div class="grid-2" style="align-items:center;">
+        <div>
+          <svg id="curveSvg" viewBox="0 0 500 240"></svg>
+        </div>
+        <div class="step-box" id="modelDetails"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 5: CHECKLISTS & BUFFERS -->
+  <div class="panel" id="tab-4">
+    <div class="grid-2">
+      <div class="card">
+        <h2>Pre-Run &amp; Immobilization Checklist <button class="btn btn-sm" onclick="resetChecks()">Reset</button></h2>
+        <div id="checklistBox">
+          <div class="check-item"><input type="checkbox"><span>Filter (0.22 µm) and degas all running buffers thoroughly to prevent air spikes.</span></div>
+          <div class="check-item"><input type="checkbox"><span>Perform pH scouting (pH 4.0–5.5 in 10 mM Sodium Acetate) below ligand pI for amine coupling.</span></div>
+          <div class="check-item"><input type="checkbox"><span>Leave Flow Cell 1 (Fc1) blank-activated/blocked as an in-line reference surface.</span></div>
+          <div class="check-item"><input type="checkbox"><span>Match DMSO and surfactant (P20) concentrations exactly between analyte dilutions and running buffer.</span></div>
+          <div class="check-item"><input type="checkbox"><span>Include at least 2–3 buffer blank cycles for double-referencing subtraction.</span></div>
+          <div class="check-item"><input type="checkbox"><span>Use high flow rates (30–50 µL/min) during kinetic runs to minimize mass transport limitation.</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Buffer Selection &amp; Additive Guidelines</h2>
+        <div class="step-box" style="margin-bottom:10px;"><strong>Detergent / Surfactant (0.005%–0.05% P20 or Tween-20)</strong>Prevents protein adsorption to microfluidic tubing and reduces non-specific hydrophobic sticking. Omit strictly on L1/HPA lipid chips.</div>
+        <div class="step-box" style="margin-bottom:10px;"><strong>Reducing Agents (TCEP vs. DTT)</strong>Prefer 0.5–1 mM TCEP over DTT for maintaining free cysteines, as DTT rapidly reduces Ni²⁺ on NTA chips and degrades gold-thiol monolayers.</div>
+        <div class="step-box"><strong>Soluble Dextran / BSA Carrier (NSB Suppression)</strong>Add 1 mg/mL carboxymethyl-dextran (CMD) and/or 0.1–0.5 mg/mL BSA to running buffer when screening sticky analytes or serum samples.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Expanded Standard &amp; Specialized Running Buffer Formulations (1×)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Buffer Name</th><th>Exact 1× Composition</th><th>pH</th><th>Best Application &amp; Compatibility Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HBS-EP+</strong></td><td>10 mM HEPES, 150 mM NaCl, 3 mM EDTA, 0.05% v/v Surfactant P20</td><td>7.4</td><td>Standard protein–protein &amp; antibody kinetics. EDTA chelates trace divalent metals and inhibits metalloproteases.</td></tr>
+            <tr><td><strong>HBS-P+ (EDTA-Free)</strong></td><td>10 mM HEPES, 150 mM NaCl, 0.05% v/v Surfactant P20</td><td>7.4</td><td>NTA / Tris-NTA His-capture chips (prevents Ni²⁺ stripping). Supplement with 1–5 mM Mg²⁺/Ca²⁺ for integrins or kinases.</td></tr>
+            <tr><td><strong>PBS-P+ (Phosphate)</strong></td><td>10 mM Na₂HPO₄/KH₂PO₄, 137 mM NaCl, 2.7 mM KCl, 0.05% P20</td><td>7.4</td><td>Physiological phosphate system; standard base for small-molecule screening when paired with 1–5% DMSO.</td></tr>
+            <tr><td><strong>PBS-P+ + 1–5% DMSO</strong></td><td>10 mM Phosphate, 137 mM NaCl, 2.7 mM KCl, 0.05% P20, 1–5% v/v DMSO</td><td>7.4</td><td>Small-molecule, fragment, and PROTAC screening. Always run a 4–8 point DMSO solvent correction series.</td></tr>
+            <tr><td><strong>HBS-N (Detergent-Free)</strong></td><td>10 mM HEPES, 150 mM NaCl (No EDTA, No P20)</td><td>7.4</td><td>Liposome &amp; membrane protein capture (L1 and HPA chips) where detergents solubilize intact lipid bilayers.</td></tr>
+            <tr><td><strong>TBS-P+ (Tris-Buffered)</strong></td><td>20 mM Tris-HCl, 150 mM NaCl, 0.05% v/v Surfactant P20</td><td>7.5</td><td>Ideal for Ca²⁺/Zn²⁺-dependent enzymes and lectins where phosphate buffers would precipitate divalent cations.</td></tr>
+            <tr><td><strong>High-Salt HBS-EP+</strong></td><td>10 mM HEPES, 300–500 mM NaCl, 3 mM EDTA, 0.05% P20</td><td>7.4</td><td>Suppresses electrostatic non-specific binding (NSB) of highly basic proteins (pI &gt; 8.5) and nucleic acid binders.</td></tr>
+            <tr><td><strong>Nucleic Acid Hybridization</strong></td><td>10 mM Tris-HCl, 500 mM–1 M NaCl, 1 mM EDTA, 0.05% P20</td><td>7.5</td><td>High ionic strength shields phosphate backbone repulsion for DNA/RNA aptamer kinetics and Biotin CAPture chips.</td></tr>
+            <tr><td><strong>MES Mildly Acidic</strong></td><td>20 mM MES, 150 mM NaCl, 0.05% v/v Surfactant P20</td><td>6.0–6.5</td><td>Endosomal / lysosomal pH mimicry (e.g., FcRn–IgG pH-dependent binding assays or tumor microenvironment).</td></tr>
+            <tr><td><strong>Kinase / ATP Assay Buffer</strong></td><td>20 mM HEPES, 150 mM NaCl, 10 mM MgCl₂, 1 mM TCEP, 0.1–1 mM ATP, 0.05% P20</td><td>7.4</td><td>Allosteric kinase inhibitors and ATP-competitive binders; uses TCEP instead of DTT to protect sensor surfaces.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
