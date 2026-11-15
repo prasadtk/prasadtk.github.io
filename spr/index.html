@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPR Assay Guide, Rmax Calculator & KD Dilution Planner</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-alt: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --primary: #0284c7;
+    --primary-hover: #0369a1;
+    --primary-soft: #e0f2fe;
+    --accent: #0d9488;
+    --accent-soft: #ccfbf1;
+    --warning-bg: #fef3c7;
+    --warning-text: #92400e;
+    --danger-bg: #fee2e2;
+    --danger-text: #991b1b;
+    --success-bg: #dcfce7;
+    --success-text: #166534;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 24px 16px 64px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 28px 32px;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  header h1 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  header p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    max-width: 680px;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: #38bdf8;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .nav-tab {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nav-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .nav-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+  .section {
+    display: none;
+  }
+  .section.active {
+    display: block;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .card-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .hint {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  input[type="number"], input[type="text"], select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--surface);
+    transition: border-color 0.15s;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+  }
+  .input-row {
+    display: flex;
+    gap: 8px;
+  }
+  .input-row input { flex: 1; }
+  .input-row select { width: 105px; }
+  .mode-switch {
+    display: inline-flex;
+    background: var(--surface-alt);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .mode-btn {
+    padding: 7px 14px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .mode-btn.active {
+    background: var(--surface);
+    color: var(--primary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  }
+  .result-box {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .result-label {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .result-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 6px 0;
+  }
+  .result-meta {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .alert {
+    padding: 12px 14px;
+    border-radius: 7px;
+    font-size: 0.86rem;
+    margin-top: 14px;
+    font-weight: 500;
+  }
+  .alert-success { background: var(--success-bg); color: var(--success-text); }
+  .alert-warning { background: var(--warning-bg); color: var(--warning-text); }
+  .alert-danger { background: var(--danger-bg); color: var(--danger-text); }
+  .formula-box {
+    background: #f8fafc;
+    border-left: 3px solid var(--primary);
+    padding: 10px 14px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    border-radius: 0 6px 6px 0;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: var(--primary-hover); }
+  .btn-outline {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover {
+    background: var(--surface-alt);
+    border-color: #cbd5e1;
+  }
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 0.78rem;
+  }
+  .preset-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+  .preset-bar span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+  }
+  th {
+    background: var(--surface-alt);
+    color: var(--text);
+    font-weight: 700;
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #f8fafc; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--primary-soft);
+    color: var(--primary-hover);
+  }
+  .tag-blank {
+    background: var(--surface-alt);
+    color: var(--text-muted);
+  }
+  .tag-dup {
+    background: var(--accent-soft);
+    color: #0f766e;
+  }
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  .rule-item {
+    background: var(--surface-alt);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .rule-item h4 {
+    font-size: 0.94rem;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .rule-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  footer {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 32px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <div class="badge">Surface Plasmon Resonance (SPR) Bench Toolkit</div>
+      <h1>SPR Assay Guide, R<sub>max</sub> Calculator &amp; K<sub>D</sub> Dilution Planner</h1>
+      <p>Calculate target ligand immobilization levels, predict theoretical R<sub>max</sub>, prepare serial analyte dilutions, and reference critical method parameters from small-molecule fragments to large antibodies.</p>
+    </div>
+    <div>
+      <button class="btn btn-outline" onclick="exportAllCSV()" title="Download current calculator and dilution plan as CSV">Export Run Sheet (CSV)</button>
+    </div>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('all', this)">All Tools (Combined View)</button>
+    <button class="nav-tab" onclick="switchTab('calc', this)">1. R<sub>max</sub> &amp; Immobilization Calculator</button>
+    <button class="nav-tab" onclick="switchTab('dilution', this)">2. K<sub>D</sub> Serial Dilution Planner</button>
+    <button class="nav-tab" onclick="switchTab('table', this)">3. Ligand–Analyte Reference Table</button>
+  </div>
+
+  <!-- SECTION 1: RMAX & IMMOBILIZATION CALCULATOR -->
+  <div id="sec-calc" class="section active">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Bidirectional R<sub>max</sub> &amp; Target Immobilization Calculator</div>
+          <div class="card-subtitle">Solve for expected binding ceiling (R<sub>max</sub>) or required ligand density (R<sub>ligand</sub>)</div>
+        </div>
+        <div class="mode-switch">
+          <button id="mode-forward" class="mode-btn active" onclick="setCalcMode('forward')">Solve for R<sub>max</sub></button>
+          <button id="mode-backward" class="mode-btn" onclick="setCalcMode('backward')">Solve for Target R<sub>ligand</sub></button>
+        </div>
+      </div>
+
+      <div class="preset-bar">
+        <span>Quick Presets:</span>
+        <button class="btn btn-outline btn-sm" onclick="applyPreset(50000, 250, 8000, 25, 1, 0.5)">Fragment (250 Da)</button>
+        <button class="btn btn-outline btn-sm" onclick="applyPreset(50000, 450, 5000, 30, 1, 0.5)">Small Molecule (450 Da)</button>
+        <button class="btn btn-outline btn-sm" onclick="applyPreset(50000, 50000, 100, 50, 1, 0.5)">Protein–Protein (50 kDa)</button>
+        <button class="btn btn-outline btn-sm" onclick="applyPreset(150000, 30000, 250, 50, 2, 0.7)">IgG on Chip + Antigen</button>
+        <button class="btn btn-outline btn-sm" onclick="applyPreset(30000, 150000, 25, 60, 1, 0.5)">Antigen on Chip + IgG</button>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <div class="form-group">
+            <label>Ligand Molecular Weight <span class="hint">(Immobilized on chip)</span></label>
+            <div class="input-row">
+              <input type="number" id="mw-ligand" value="50" min="0.01" step="any" oninput="calculateRmax()">
+              <select id="unit-ligand" onchange="calculateRmax()">
+                <option value="1000" selected>kDa</option>
+                <option value="1">Da</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Analyte Molecular Weight <span class="hint">(Flowing in solution)</span></label>
+            <div class="input-row">
+              <input type="number" id="mw-analyte" value="50" min="0.01" step="any" oninput="calculateRmax()">
+              <select id="unit-analyte" onchange="calculateRmax()">
+                <option value="1000" selected>kDa</option>
+                <option value="1">Da</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" id="group-rligand">
+            <label>Immobilized Ligand Level — R<sub>ligand</sub> (RU)</label>
+            <input type="number" id="r-ligand" value="100" min="0.1" step="any" oninput="calculateRmax()">
+          </div>
+
+          <div class="form-group" id="group-rmax" style="display:none;">
+            <label>Desired Target R<sub>max</sub> (RU) <span class="hint">(20–100 RU recommended for kinetics)</span></label>
+            <input type="number" id="target-rmax" value="50" min="0.1" step="any" oninput="calculateRmax()">
+          </div>
+
+          <div class="grid-2" style="gap:12px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Binding Valency <span class="hint">(Sites/ligand)</span></label>
+              <input type="number" id="valency" value="1" min="0.1" step="0.1" oninput="calculateRmax()">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Active Fraction <span class="hint">(0.1 – 1.0)</span></label>
+              <input type="number" id="fraction-active" value="0.5" min="0.05" max="1" step="0.05" oninput="calculateRmax()">
+            </div>
+          </div>
+        </div>
+
+        <div class="result-box">
+          <div class="result-label" id="calc-result-label">Expected Maximum Binding Signal (R<sub>max</sub>)</div>
+          <div class="result-value" id="calc-result-value">50.0 RU</div>
+          <div class="result-meta" id="calc-result-sub">Theoretical 100% active R<sub>max</sub>: 100.0 RU &bull; MW Ratio (Analyte/Ligand): 1.00</div>
+          <div id="calc-guidance" class="alert alert-success">Optimal range (20–100 RU) for standard kinetic rate measurements (k<sub>a</sub> and k<sub>d</sub>).</div>
+          <div class="formula-box" id="calc-formula">
+            R<sub>max</sub> = (MW<sub>analyte</sub> / MW<sub>ligand</sub>) &times; R<sub>ligand</sub> &times; Valency &times; Active Fraction
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: KD SERIAL DILUTION PLANNER -->
+  <div id="sec-dilution" class="section active">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">K<sub>D</sub> Serial Dilution Planner</div>
+          <div class="card-subtitle">Generate a concentration series spanning 0.1&times; to 10&times; K<sub>D</sub> with bench pipetting volumes</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="setOptimalTopConc()">Auto-Set Top Conc (10&times; K<sub>D</sub>)</button>
+      </div>
+
+      <div class="grid-3" style="margin-bottom:18px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Expected K<sub>D</sub></label>
+          <div class="input-row">
+            <input type="number" id="kd-val" value="10" min="0.0001" step="any" oninput="onKdChange()">
+            <select id="kd-unit" onchange="onKdChange()">
+              <option value="1">nM</option>
+              <option value="1000">&mu;M</option>
+              <option value="0.001">pM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Top Analyte Concentration <span class="hint">(Default: 10&times; K<sub>D</sub>)</span></label>
+          <div class="input-row">
+            <input type="number" id="top-conc" value="100" min="0.0001" step="any" oninput="generateDilutions()">
+            <select id="top-unit" onchange="generateDilutions()">
+              <option value="1" selected>nM</option>
+              <option value="1000">&mu;M</option>
+              <option value="0.001">pM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Serial Dilution Factor</label>
+          <select id="dil-factor" onchange="generateDilutions()">
+            <option value="2">2-fold (1 : 1)</option>
+            <option value="2.5">2.5-fold (1 : 1.5)</option>
+            <option value="3" selected>3-fold (1 : 2)</option>
+            <option value="3.16227766">Half-log (~3.16-fold)</option>
+            <option value="5">5-fold (1 : 4)</option>
+            <option value="10">10-fold (1 : 9)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Number of Concentration Points</label>
+          <select id="num-points" onchange="generateDilutions()">
+            <option value="5">5 points</option>
+            <option value="6" selected>6 points</option>
+            <option value="7">7 points</option>
+            <option value="8">8 points</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Final Volume Needed per Tube (&mu;L) <span class="hint">(After transfer)</span></label>
+          <input type="number" id="final-vol" value="200" min="20" step="10" oninput="generateDilutions()">
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Analyte Stock Concentration</label>
+          <div class="input-row">
+            <input type="number" id="stock-conc" value="10" min="0.001" step="any" oninput="generateDilutions()">
+            <select id="stock-unit" onchange="generateDilutions()">
+              <option value="1">nM</option>
+              <option value="1000" selected>&mu;M</option>
+              <option value="1000000">mM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="dilution-summary" class="alert alert-success" style="margin-top:0; margin-bottom:16px;"></div>
+
+      <div class="table-wrap">
+        <table id="dilution-table">
+          <thead>
+            <tr>
+              <th>Cycle / Tube</th>
+              <th>Role</th>
+              <th>Target Concentration</th>
+              <th>Ratio to K<sub>D</sub></th>
+              <th>Preparation Instruction (Pipetting)</th>
+              <th>Remaining Vol (&mu;L)</th>
+            </tr>
+          </thead>
+          <tbody id="dilution-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: LIGAND-ANALYTE REFERENCE TABLE -->
+  <div id="sec-table" class="section active">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">SPR Parameters by Ligand–Analyte Size</div>
+          <div class="card-subtitle">Click "Load" on any row to populate the R<sub>max</sub> calculator above</div>
+        </div>
+        <div style="min-width:240px;">
+          <input type="text" id="table-search" placeholder="Filter by molecule, chip, or focus..." oninput="filterTable()">
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="ref-table">
+          <thead>
+            <tr>
+              <th>Interaction Type</th>
+              <th>Ligand MW</th>
+              <th>Analyte MW</th>
+              <th>Target R<sub>ligand</sub></th>
+              <th>Target R<sub>max</sub></th>
+              <th>Flow Rate</th>
+              <th>Recommended Chip</th>
+              <th>Key Experimental Focus</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ref-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Universal Method Setup Guidelines</div>
+          <div class="card-subtitle">Core rules of thumb for high-quality kinetic and affinity sensorgrams</div>
+        </div>
+      </div>
+      <div class="rules-grid">
+        <div class="rule-item">
+          <h4>1. Analyte Concentration Range</h4>
+          <p>Inject 5 to 8 serial dilutions spanning <strong>0.1&times; K<sub>D</sub> to 10&times; K<sub>D</sub></strong>. Include buffer blanks for double-referencing and at least one duplicate middle concentration.</p>
+        </div>
+        <div class="rule-item">
+          <h4>2. Contact (Association) Time</h4>
+          <p>Use <strong>60–180 seconds</strong> for standard proteins. Fast-on/fast-off small molecules only need <strong>30–60 s</strong>; slow-associating complexes may require <strong>180–300 s</strong>.</p>
+        </div>
+        <div class="rule-item">
+          <h4>3. Dissociation Time</h4>
+          <p>Use <strong>120–600 seconds</strong>. For tight antibodies (K<sub>D</sub> &lt; 1 nM), extend dissociation to <strong>900–1,800 s</strong> to observe at least a 5% signal decay for accurate k<sub>d</sub> fitting.</p>
+        </div>
+        <div class="rule-item">
+          <h4>4. Regeneration &amp; Buffer Match</h4>
+          <p>Start mild (<strong>10 mM Glycine-HCl pH 2.0–2.5</strong> or <strong>1–2 M NaCl</strong> for 15–30 s). Match running buffer DMSO and detergent percentages exactly across all samples.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Standalone SPR Assay Reference &amp; Calculation Tool </footer>
+</div>
+
+<script>
+const REF_DATA = [
+  {
+    type: "Fragment Screening",
+    sub: "Protein + Fragment",
+    ligMwText: "20 – 100 kDa",
+    anaMwText: "100 – 300 Da",
+    rLigText: "5,000 – 15,000 RU",
+    rMaxText: "5 – 30 RU",
+    flow: "30 – 50 μL/min",
+    chip: "CM5, CM7 (High capacity)",
+    focus: "Requires DMSO solvent correction and ultra-clean double referencing.",
+    preset: [50000, 200, 10000, 20, 1, 0.5]
+  },
+  {
+    type: "Small-Molecule Drug",
+    sub: "Protein + Small Molecule",
+    ligMwText: "20 – 100 kDa",
+    anaMwText: "300 – 1,000 Da",
+    rLigText: "3,000 – 10,000 RU",
+    rMaxText: "10 – 50 RU",
+    flow: "30 – 50 μL/min",
+    chip: "CM5, Streptavidin (SA)",
+    focus: "Maximize ligand density while preserving protein activity; include DMSO correction.",
+    preset: [50000, 500, 6000, 30, 1, 0.5]
+  },
+  {
+    type: "Peptide Binding",
+    sub: "Protein + Peptide",
+    ligMwText: "20 – 100 kDa",
+    anaMwText: "1 – 5 kDa",
+    rLigText: "500 – 2,500 RU",
+    rMaxText: "20 – 80 RU",
+    flow: "30 – 50 μL/min",
+    chip: "CM5, SA, NTA",
+    focus: "Watch for non-specific charge interactions with the negatively charged dextran matrix.",
+    preset: [50000, 2500, 1500, 40, 1, 0.5]
+  },
+  {
+    type: "Small Protein / Cytokine",
+    sub: "Protein + Small Protein",
+    ligMwText: "30 – 150 kDa",
+    anaMwText: "5 – 25 kDa",
+    rLigText: "200 – 1,000 RU",
+    rMaxText: "20 – 100 RU",
+    flow: "30 – 50 μL/min",
+    chip: "CM5, SA, NTA",
+    focus: "Balance signal height with low surface density to prevent mass transport limits.",
+    preset: [60000, 15000, 400, 50, 1, 0.5]
+  },
+  {
+    type: "Standard Protein–Protein",
+    sub: "Medium + Medium",
+    ligMwText: "30 – 80 kDa",
+    anaMwText: "30 – 80 kDa",
+    rLigText: "50 – 250 RU",
+    rMaxText: "20 – 100 RU",
+    flow: "30 – 60 μL/min",
+    chip: "CM5, SA, NTA",
+    focus: "Keep Rmax below 100 RU to ensure accurate association (ka) and dissociation (kd) rates.",
+    preset: [50000, 50000, 100, 50, 1, 0.5]
+  },
+  {
+    type: "Antibody on Chip + Antigen",
+    sub: "IgG + Medium Protein",
+    ligMwText: "~150 kDa",
+    anaMwText: "20 – 80 kDa",
+    rLigText: "100 – 400 RU",
+    rMaxText: "20 – 100 RU",
+    flow: "30 – 60 μL/min",
+    chip: "Protein A/G, Anti-Fc, CM5",
+    focus: "Capture chips orient the antibody cleanly; avoid harsh multi-cycle regeneration.",
+    preset: [150000, 40000, 250, 50, 2, 0.7]
+  },
+  {
+    type: "Antigen on Chip + Antibody",
+    sub: "Small Protein + IgG",
+    ligMwText: "10 – 50 kDa",
+    anaMwText: "~150 kDa",
+    rLigText: "15 – 100 RU",
+    rMaxText: "20 – 100 RU",
+    flow: "50 – 100 μL/min",
+    chip: "CM5, SA, NTA",
+    focus: "Critical: Keep immobilization very low; IgG bivalent avidity distorts 1:1 kinetics if too dense.",
+    preset: [25000, 150000, 20, 60, 1, 0.5]
+  },
+  {
+    type: "Large Complex / VLP",
+    sub: "Protein + VLP / Nanoparticle",
+    ligMwText: "20 – 150 kDa",
+    anaMwText: ">500 kDa – MDa",
+    rLigText: "10 – 50 RU",
+    rMaxText: "20 – 150 RU",
+    flow: "50 – 100 μL/min",
+    chip: "C1 (Flat, no dextran), CM3",
+    focus: "Use flat or short-dextran chips so bulky analytes reach the surface without steric hindrance.",
+    preset: [50000, 1000000, 15, 100, 1, 0.35]
+  }
+];
+
+let calcMode = 'forward';
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  const sections = ['calc', 'dilution', 'table'];
+  sections.forEach(s => {
+    const secEl = document.getElementById('sec-' + s);
+    if (tab === 'all' || tab === s) {
+      secEl.classList.add('active');
+    } else {
+      secEl.classList.remove('active');
+    }
+  });
+}
+
+function setCalcMode(mode) {
+  calcMode = mode;
+  document.getElementById('mode-forward').classList.toggle('active', mode === 'forward');
+  document.getElementById('mode-backward').classList.toggle('active', mode === 'backward');
+  document.getElementById('group-rligand').style.display = mode === 'forward' ? 'block' : 'none';
+  document.getElementById('group-rmax').style.display = mode === 'backward' ? 'block' : 'none';
+  calculateRmax();
+}
+
+function applyPreset(ligDa, anaDa, rLig, rMax, val, frac) {
+  if (ligDa >= 1000) {
+    document.getElementById('mw-ligand').value = +(ligDa / 1000).toFixed(3);
+    document.getElementById('unit-ligand').value = "1000";
+  } else {
+    document.getElementById('mw-ligand').value = ligDa;
+    document.getElementById('unit-ligand').value = "1";
+  }
+  if (anaDa >= 1000) {
+    document.getElementById('mw-analyte').value = +(anaDa / 1000).toFixed(3);
+    document.getElementById('unit-analyte').value = "1000";
+  } else {
+    document.getElementById('mw-analyte').value = anaDa;
+    document.getElementById('unit-analyte').value = "1";
+  }
+  document.getElementById('r-ligand').value = rLig;
+  document.getElementById('target-rmax').value = rMax;
+  document.getElementById('valency').value = val;
+  document.getElementById('fraction-active').value = frac;
+  calculateRmax();
+  document.getElementById('sec-calc').scrollIntoView({ behavior: 'smooth' });
+}
+
+function calculateRmax() {
+  const mwLig = parseFloat(document.getElementById('mw-ligand').value) * parseFloat(document.getElementById('unit-ligand').value);
+  const mwAna = parseFloat(document.getElementById('mw-analyte').value) * parseFloat(document.getElementById('unit-analyte').value);
+  const valency = parseFloat(document.getElementById('valency').value) || 1;
+  const frac = parseFloat(document.getElementById('fraction-active').value) || 0.5;
+
+  const labelEl = document.getElementById('calc-result-label');
+  const valEl = document.getElementById('calc-result-value');
+  const subEl = document.getElementById('calc-result-sub');
+  const guideEl = document.getElementById('calc-guidance');
+  const formulaEl = document.getElementById('calc-formula');
+
+  if (!mwLig || !mwAna || mwLig <= 0 || mwAna <= 0) {
+    valEl.textContent = "—";
+    return;
+  }
+
+  const ratio = mwAna / mwLig;
+  let effectiveRmax = 0;
+
+  if (calcMode === 'forward') {
+    const rLig = parseFloat(document.getElementById('r-ligand').value) || 0;
+    const theo100 = ratio * rLig * valency;
+    effectiveRmax = theo100 * frac;
+
+    labelEl.innerHTML = 'Expected Maximum Binding Signal (R<sub>max</sub>)';
+    valEl.textContent = effectiveRmax.toFixed(1) + ' RU';
+    subEl.innerHTML = `100% Active Theoretical R<sub>max</sub>: <strong>${theo100.toFixed(1)} RU</strong> &bull; MW Ratio (Analyte/Ligand): <strong>${ratio.toFixed(3)}</strong>`;
+    formulaEl.innerHTML = 'R<sub>max</sub> = (MW<sub>analyte</sub> / MW<sub>ligand</sub>) &times; R<sub>ligand</sub> &times; Valency &times; Active Fraction';
+  } else {
+    const targetRmax = parseFloat(document.getElementById('target-rmax').value) || 0;
+    effectiveRmax = targetRmax;
+    const reqRlig = (targetRmax * mwLig) / (mwAna * valency * frac);
+    const minRlig100 = (targetRmax * mwLig) / (mwAna * valency);
+
+    labelEl.innerHTML = 'Target Ligand Immobilization (R<sub>ligand</sub>)';
+    valEl.textContent = reqRlig.toFixed(1) + ' RU';
+    subEl.innerHTML = `Minimum (if 100% active): <strong>${minRlig100.toFixed(1)} RU</strong> &bull; Target R<sub>max</sub>: <strong>${targetRmax.toFixed(1)} RU</strong>`;
+    formulaEl.innerHTML = 'R<sub>ligand</sub> = (Target R<sub>max</sub> &times; MW<sub>ligand</sub>) / (MW<sub>analyte</sub> &times; Valency &times; Active Fraction)';
+  }
+
+  if (effectiveRmax < 5) {
+    guideEl.className = 'alert alert-danger';
+    guideEl.innerHTML = '<strong>Low Signal Warning (&lt; 5 RU):</strong> Signal may be close to baseline noise. Increase immobilized R<sub>ligand</sub> or ensure ultra-clean double referencing.';
+  } else if (effectiveRmax <= 100) {
+    guideEl.className = 'alert alert-success';
+    guideEl.innerHTML = '<strong>Optimal Kinetic Range (5–100 RU):</strong> Ideal signal-to-noise ratio while minimizing mass transport limitations and steric hindrance.';
+  } else if (effectiveRmax <= 200) {
+    guideEl.className = 'alert alert-warning';
+    guideEl.innerHTML = '<strong>Moderate-High Density (100–200 RU):</strong> Good for affinity/steady-state, but watch for mass transport limitation (k<sub>t</sub>) during fast kinetic fits.';
+  } else {
+    guideEl.className = 'alert alert-danger';
+    guideEl.innerHTML = '<strong>High Density Warning (&gt; 200 RU):</strong> High risk of mass transport artifacts, rebinding, and steric crowding for kinetic rate measurements.';
+  }
+}
+
+function formatConc(nM) {
+  if (nM >= 1e6) return (nM / 1e6).toPrecision(3).replace(/\.?0+$/, '') + ' mM';
+  if (nM >= 1e3) return (nM / 1e3).toPrecision(3).replace(/\.?0+$/, '') + ' μM';
+  if (nM >= 1) return nM.toPrecision(3).replace(/\.?0+$/, '') + ' nM';
+  return (nM * 1e3).toPrecision(3).replace(/\.?0+$/, '') + ' pM';
+}
+
+function onKdChange() {
+  setOptimalTopConc();
+}
+
+function setOptimalTopConc() {
+  const kdVal = parseFloat(document.getElementById('kd-val').value) || 10;
+  const kdUnit = document.getElementById('kd-unit').value;
+  document.getElementById('top-conc').value = +(kdVal * 10).toPrecision(4);
+  document.getElementById('top-unit').value = kdUnit;
+  generateDilutions();
+}
+
+let lastDilutionRows = [];
+
+function generateDilutions() {
+  const kdNm = (parseFloat(document.getElementById('kd-val').value) || 10) * parseFloat(document.getElementById('kd-unit').value);
+  const topNm = (parseFloat(document.getElementById('top-conc').value) || 100) * parseFloat(document.getElementById('top-unit').value);
+  const factor = parseFloat(document.getElementById('dil-factor').value) || 3;
+  const nPoints = parseInt(document.getElementById('num-points').value) || 6;
+  const finalVol = parseFloat(document.getElementById('final-vol').value) || 200;
+  const stockNm = (parseFloat(document.getElementById('stock-conc').value) || 10000) * parseFloat(document.getElementById('stock-unit').value);
+
+  const tbody = document.getElementById('dilution-tbody');
+  const sumEl = document.getElementById('dilution-summary');
+  tbody.innerHTML = '';
+  lastDilutionRows = [];
+
+  if (kdNm <= 0 || topNm <= 0 || stockNm <= topNm) {
+    sumEl.className = 'alert alert-danger';
+    sumEl.innerHTML = '<strong>Check Concentrations:</strong> Ensure stock concentration is higher than your top analyte concentration.';
+    return;
+  }
+
+  // Serial dilution math:
+  // Each step transfers V_transfer into V_buffer such that (V_transfer + V_buffer) / V_transfer = factor
+  // To end up with finalVol remaining in every tube except the last (which keeps finalVol + V_transfer):
+  // V_transfer = finalVol / (factor - 1)
+  // Total prepared in Tube 1..N-1 = finalVol + V_transfer = finalVol * factor / (factor - 1)
+  // V_buffer in Tube 2..N = finalVol (so adding V_transfer gives total V_prep, then removing V_transfer leaves finalVol!)
+  const vTransfer = finalVol / (factor - 1);
+  const vPrepTop = finalVol + vTransfer;
+  const vStockTop = (topNm / stockNm) * vPrepTop;
+  const vBufTop = vPrepTop - vStockTop;
+
+  const lowestNm = topNm / Math.pow(factor, nPoints - 1);
+  const lowRatio = lowestNm / kdNm;
+  const highRatio = topNm / kdNm;
+
+  if (lowRatio <= 0.25 && highRatio >= 5) {
+    sumEl.className = 'alert alert-success';
+    sumEl.innerHTML = `<strong>Well-Balanced Series:</strong> Spans <strong>${formatConc(lowestNm)}</strong> (${lowRatio.toFixed(2)}&times; K<sub>D</sub>) to <strong>${formatConc(topNm)}</strong> (${highRatio.toFixed(1)}&times; K<sub>D</sub>). Transfer <strong>${vTransfer.toFixed(1)} &mu;L</strong> per step.`;
+  } else {
+    sumEl.className = 'alert alert-warning';
+    sumEl.innerHTML = `<strong>Range Note:</strong> Series spans <strong>${lowRatio.toFixed(2)}&times; K<sub>D</sub></strong> to <strong>${highRatio.toFixed(1)}&times; K<sub>D</sub></strong> (ideal is ~0.1&times; to 10&times; K<sub>D</sub>). Adjust dilution factor or top concentration if needed.`;
+  }
+
+  const rows = [];
+  // Blank 1
+  rows.push({
+    tube: "Blank 1",
+    role: '<span class="tag tag-blank">Buffer Blank</span>',
+    conc: "0 nM",
+    ratio: "0&times;",
+    prep: `Add <strong>${finalVol.toFixed(0)} &mu;L</strong> Running Buffer only (for double-referencing)`,
+    rem: finalVol.toFixed(0)
+  });
+
+  const midIdx = Math.floor(nPoints / 2);
+
+  for (let i = 0; i < nPoints; i++) {
+    const concNm = topNm / Math.pow(factor, i);
+    const ratioKd = concNm / kdNm;
+    const tubeNum = i + 1;
+    let prepStr = "";
+    let remVol = finalVol;
+
+    if (i === 0) {
+      prepStr = `Add <strong>${vStockTop.toFixed(1)} &mu;L</strong> Stock (${formatConc(stockNm)}) + <strong>${vBufTop.toFixed(1)} &mu;L</strong> Buffer (Total: ${vPrepTop.toFixed(1)} &mu;L)`;
+    } else if (i < nPoints - 1) {
+      prepStr = `Transfer <strong>${vTransfer.toFixed(1)} &mu;L</strong> from Tube ${tubeNum - 1} + <strong>${finalVol.toFixed(1)} &mu;L</strong> Buffer`;
+    } else {
+      prepStr = `Transfer <strong>${vTransfer.toFixed(1)} &mu;L</strong> from Tube ${tubeNum - 1} + <strong>${finalVol.toFixed(1)} &mu;L</strong> Buffer (No further transfer)`;
+      remVol = finalVol + vTransfer;
+    }
+
+    rows.push({
+      tube: `Tube ${tubeNum}`,
+      role: i === 0 ? '<span class="tag">Top Conc</span>' : '<span class="tag">Analyte</span>',
+      conc: `<strong>${formatConc(concNm)}</strong>`,
+      ratio: `${ratioKd >= 1 ? ratioKd.toFixed(1) : ratioKd.toFixed(2)}&times; K<sub>D</sub>`,
+      prep: prepStr,
+      rem: remVol.toFixed(1)
+    });
+
+    if (i === midIdx) {
+      rows.push({
+        tube: `Tube ${tubeNum} (Dup)`,
+        role: '<span class="tag tag-dup">QC Duplicate</span>',
+        conc: `<strong>${formatConc(concNm)}</strong>`,
+        ratio: `${ratioKd >= 1 ? ratioKd.toFixed(1) : ratioKd.toFixed(2)}&times; K<sub>D</sub>`,
+        prep: `Re-inject from Tube ${tubeNum} mid/end-run to verify surface stability`,
+        rem: "—"
+      });
+    }
+  }
+
+  // Blank 2
+  rows.push({
+    tube: "Blank 2",
+    role: '<span class="tag tag-blank">Carryover Check</span>',
+    conc: "0 nM",
+    ratio: "0&times;",
+    prep: `Add <strong>${finalVol.toFixed(0)} &mu;L</strong> Running Buffer after top concentration`,
+    rem: finalVol.toFixed(0)
+  });
+
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${r.tube}</strong></td>
+      <td>${r.role}</td>
+      <td>${r.conc}</td>
+      <td>${r.ratio}</td>
+      <td>${r.prep}</td>
+      <td>${r.rem}</td>
+    `;
+    tbody.appendChild(tr);
+    lastDilutionRows.push(r);
+  });
+}
+
+function renderRefTable() {
+  const tbody = document.getElementById('ref-tbody');
+  tbody.innerHTML = '';
+  REF_DATA.forEach((row, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${row.type}</strong><br><span class="hint">${row.sub}</span></td>
+      <td>${row.ligMwText}</td>
+      <td>${row.anaMwText}</td>
+      <td><strong>${row.rLigText}</strong></td>
+      <td><strong>${row.rMaxText}</strong></td>
+      <td>${row.flow}</td>
+      <td>${row.chip}</td>
+      <td>${row.focus}</td>
+      <td><button class="btn btn-sm" onclick="applyPreset(${row.preset.join(',')})">Load</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterTable() {
+  const q = document.getElementById('table-search').value.toLowerCase();
+  const rows = document.querySelectorAll('#ref-tbody tr');
+  rows.forEach(tr => {
+    tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function stripTags(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return (tmp.textContent || tmp.innerText || '').replace(/"/g, '""');
+}
+
+function exportAllCSV() {
+  let csv = "SPR ASSAY RUN SHEET\n\n";
+  csv += "SECTION 1: RMAX & IMMOBILIZATION PARAMETERS\n";
+  csv += `Mode,${calcMode === 'forward' ? 'Solve for Rmax' : 'Solve for Target R_ligand'}\n`;
+  csv += `Ligand MW,${document.getElementById('mw-ligand').value} ${document.getElementById('unit-ligand').selectedOptions[0].text}\n`;
+  csv += `Analyte MW,${document.getElementById('mw-analyte').value} ${document.getElementById('unit-analyte').selectedOptions[0].text}\n`;
+  csv += `Valency,${document.getElementById('valency').value}\n`;
+  csv += `Active Fraction,${document.getElementById('fraction-active').value}\n`;
+  csv += `Calculated Result,"${stripTags(document.getElementById('calc-result-label').innerHTML)}: ${stripTags(document.getElementById('calc-result-value').innerHTML)}"\n\n`;
+
+  csv += "SECTION 2: KD SERIAL DILUTION PLAN\n";
+  csv += `Expected KD,${document.getElementById('kd-val').value} ${document.getElementById('kd-unit').selectedOptions[0].text}\n`;
+  csv += `Dilution Factor,${document.getElementById('dil-factor').selectedOptions[0].text}\n\n`;
+  csv += "Tube,Role,Concentration,Ratio to KD,Preparation Instruction,Remaining Vol (uL)\n";
+  lastDilutionRows.forEach(r => {
+    csv += `"${stripTags(r.tube)}","${stripTags(r.role)}","${stripTags(r.conc)}","${stripTags(r.ratio)}","${stripTags(r.prep)}","${stripTags(r.rem)}"\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'spr-assay-run-sheet.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Initialize on load
+renderRefTable();
+calculateRmax();
+generateDilutions();
+</script>
+</body>
+</html>
