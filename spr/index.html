@@ -20,13 +20,424 @@
     </div>
   </header>
 
-  <div class="tabs">
-    <button class="tab active" onclick="showTab(0, this)">1. Rmax, KD &amp; PROTAC Calculators</button>
-    <button class="tab" onclick="showTab(1, this)">2. Sensor Chip Matrix &amp; Reusable Surfaces</button>
-    <button class="tab" onclick="showTab(2, this)">3. Regeneration &amp; Elution</button>
-    <button class="tab" onclick="showTab(3, this)">4. Curve Diagnostics (10 Models)</button>
-    <button class="tab" onclick="showTab(4, this)">5. Checklists &amp; Buffer Formulations</button>
-  </div>
+  <body>
+
+    <nav class="toc">
+        <div class="theme-toggle-container">
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
+        </div>
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#ch1">1. Physical Principles & Optical Geometry</a></li>
+            <li><a href="#ch2">2. Sensor Chip Surface Chemistry & Matrices</a></li>
+            <li><a href="#ch3">3. Assay Design & Immobilization Protocols</a></li>
+            <li><a href="#ch4">4. Binding Kinetics & Rate Constants</a></li>
+            <li><a href="#ch5">5. Complex Binding Models & Mechanisms</a></li>
+            <li><a href="#ch6">6. Thermodynamics via van 't Hoff Analysis</a></li>
+            <li><a href="#ch7">7. Small-Molecule & Fragment Screening</a></li>
+            <li><a href="#ch8">8. Data Processing & Double Referencing</a></li>
+            <li><a href="#ch9">9. Experimental Artifacts & Troubleshooting</a></li>
+            <li><a href="#ch10">10. Publication Checklist (MIABE / QC)</a></li>
+            <li><a href="#ch11">11. Seminal Literature & Software</a></li>
+            <li><a href="#ch12">12. Single-Cycle Kinetics (SCK)</a></li>
+            <li><a href="#ch13">13. Advanced Optical Configurations & LSPR</a></li>
+        </ul>
+    </nav>
+
+    <main class="ebook-content">
+        <header class="book-cover">
+            <h1>Handbook of Surface Plasmon Resonance (SPR)</h1>
+            <p class="lead">A comprehensive theoretical, experimental, and analytical reference manual for designing, executing, and validating optical biosensor assays.</p>
+        </header>
+
+        <!-- CHAPTER 1 -->
+        <section id="ch1" class="chapter">
+            <span class="chapter-num">Chapter 01</span>
+            <h2 class="chapter-title">Physical Principles & Optical Geometry</h2>
+            <p>Surface Plasmon Resonance (SPR) is an optical, label-free detection phenomenon that measures real-time changes in refractive index within ~150–300 nm of a metallic sensor surface[cite: 1]. Because refractive index scales linearly with mass concentration in aqueous buffer, SPR directly monitors macromolecular association and dissociation without requiring fluorescent, enzymatic, or radioactive tags[cite: 1].</p>
+
+            <h3>1.1 Surface Plasmon Polaritons & Kretschmann Geometry</h3>
+            <p>At the interface between a noble metal (typically a 45–50 nm gold film) and a dielectric medium (aqueous running buffer), coherent oscillations of delocalized conduction electrons—termed <strong>surface plasmon polaritons (SPPs)</strong>—can be excited by p-polarized monochromatic light (commonly 650–780 nm)[cite: 1].</p>
+            <p>Because free-space photons carry insufficient momentum to directly excite SPPs on a planar metal surface, commercial instruments utilize the <strong>Kretschmann attenuated total reflection (ATR) configuration</strong>[cite: 1]. Light passes through a high-refractive-index glass prism (<em>n<sub>prism</sub></em> &approx; 1.5–1.7) and strikes the gold-coated sensor chip above the critical angle (&theta;<sub>c</sub>), generating an evanescent wave that penetrates through the thin gold film into the adjacent sample layer[cite: 1].</p>
+
+            <div class="equation-box">
+                k<sub>x</sub> = (2&pi; / &lambda;) &middot; n<sub>prism</sub> &middot; sin(&theta;<sub>SPR</sub>) = (2&pi; / &lambda;) &middot; &radic;[ (&epsilon;<sub>metal</sub> &middot; &epsilon;<sub>sample</sub>) / (&epsilon;<sub>metal</sub> + &epsilon;<sub>sample</sub>) ]
+                <span class="equation-caption">Equation 1.1: Momentum-matching resonance condition equating the in-plane wavevector of incident light (k<sub>x</sub>) to the surface plasmon dispersion relation, where &epsilon;<sub>metal</sub> and &epsilon;<sub>sample</sub> are the complex dielectric constants of gold and the sample layer[cite: 1].</span>
+            </div>
+
+            <h3>1.2 Evanescent Field Decay & Penetration Depth</h3>
+            <p>The electromagnetic field associated with the surface plasmon is strongest directly at the gold-solution interface and decays exponentially into the bulk solution[cite: 1]. The characteristic penetration depth (<em>d<sub>p</sub></em>)—defined as the distance at which field amplitude falls to 1/<em>e</em>—is typically <strong>100 to 300 nm</strong> depending on incident wavelength[cite: 1]. Consequently, SPR is strictly sensitive to molecular events occurring inside the immobilized hydrogel matrix while remaining blind to bulk solution components further away[cite: 1].</p>
+
+            <h3>1.3 Definition of the Resonance Unit (RU)</h3>
+            <p>When analyte molecules bind to immobilized ligands, water molecules are displaced from the interfacial volume, increasing the local refractive index (<em>n<sub>sample</sub></em>) and shifting the resonance dip angle (&theta;<sub>SPR</sub>) toward higher angles[cite: 1]. By convention established across standard SPR platforms[cite: 1]:</p>
+            <ul>
+                <li><strong>1 Resonance Unit (1 RU):</strong> Corresponds to a resonance angle shift of approximately <strong>0.0001&deg;</strong> (0.1 millidegrees)[cite: 1].</li>
+                <li><strong>Mass Equivalence for Globular Proteins:</strong> <strong>1 RU &approx; 1 pg/mm<sup>2</sup></strong> of surface-bound protein concentration[cite: 1].</li>
+                <li><strong>Refractive Index Increment (dn/dc):</strong> Most globular proteins exhibit a consistent refractive index increment of ~0.18–0.19 mL/g, meaning response scales reliably with molecular mass regardless of amino acid sequence[cite: 1].</li>
+                <li><strong>Non-Protein Biomolecules:</strong> Nucleic acids (<em>dn/dc</em> &approx; 0.17 mL/g) generate roughly 0.8–0.9 RU per pg/mm<sup>2</sup>, whereas heavily glycosylated proteins, lipids, or carbohydrates exhibit slightly lower RU-per-mass ratios[cite: 1].</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 2 -->
+        <section id="ch2" class="chapter">
+            <span class="chapter-num">Chapter 02</span>
+            <h2 class="chapter-title">Sensor Chip Surface Chemistry & Matrices</h2>
+            <p>Bare gold strongly adsorbs and denatures proteins via hydrophobic and thiol-gold interactions[cite: 1]. Modern SPR sensor chips interpose a self-assembled monolayer (SAM) of alkanethiols linked to a biocompatible hydrogel matrix—most commonly linear carboxymethylated dextran—that preserves native protein conformation while providing functional groups for covalent or affinity attachment[cite: 1].</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chip Type</th>
+                        <th>Matrix Architecture</th>
+                        <th>Functional Chemistry</th>
+                        <th>Optimal Applications</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CM5 (Standard Dextran)</strong></td>
+                        <td>~100 nm flexible carboxymethyl dextran hydrogel[cite: 1]</td>
+                        <td>Covalent amine, thiol, or aldehyde coupling via -COOH groups[cite: 1]</td>
+                        <td>General protein–protein, antibody–antigen, and small-molecule binding requiring high capacity[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CM4 (Low-Charge Dextran)</strong></td>
+                        <td>~100 nm dextran with ~30% of CM5 carboxylation[cite: 1]</td>
+                        <td>Covalent coupling with reduced net negative charge[cite: 1]</td>
+                        <td>Minimizing non-specific electrostatic attraction with basic (high-pI) analytes or nucleic acids[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CM3 / C1 (Short / Planar)</strong></td>
+                        <td>Short dextran (CM3) or flat carboxylated SAM without dextran (C1)[cite: 1]</td>
+                        <td>Covalent coupling at the immediate surface[cite: 1]</td>
+                        <td>Large multivalent analytes (viruses, VLPs, exosomes, whole cells) unable to diffuse into a 3D dextran matrix[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SA (Streptavidin)</strong></td>
+                        <td>Pre-immobilized tetrameric streptavidin on dextran[cite: 1]</td>
+                        <td>Non-covalent biotin capture (<em>K<sub>D</sub></em> &approx; 10<sup>-15</sup> M)[cite: 1]</td>
+                        <td>Site-specifically biotinylated proteins, peptides, oligonucleotides, and glycans[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NTA (Nitrilotriacetic Acid)</strong></td>
+                        <td>Carboxymethyl dextran functionalized with NTA chelators[cite: 1]</td>
+                        <td>Ni<sup>2+</sup>-mediated chelation of polyhistidine (His<sub>6</sub>–His<sub>10</sub>) tags[cite: 1]</td>
+                        <td>Reversible, oriented capture of recombinant His-tagged proteins; easily stripped with EDTA[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Protein A / Protein G</strong></td>
+                        <td>Recombinant Fc-binding domains covalently linked to dextran[cite: 1]</td>
+                        <td>Reversible Fc-region affinity capture of IgG antibodies[cite: 1]</td>
+                        <td>High-throughput kinetic screening of monoclonal antibodies in oriented, active conformations[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>L1 / HPA (Lipophilic)</strong></td>
+                        <td>Dextran modified with lipophilic alkyl chains (L1) or flat hydrophobic SAM (HPA)[cite: 1]</td>
+                        <td>Capture of intact liposomes (L1) or supported lipid monolayers (HPA)[cite: 1]</td>
+                        <td>Membrane protein interactions, peripheral membrane binding, and antimicrobial peptide partitioning[cite: 1].</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout">
+                <strong class="callout-title">Choosing Between Direct Covalent Coupling and Affinity Capture</strong>
+                Direct amine coupling (e.g., on CM5) creates a permanent covalent bond that withstands harsh regeneration buffers, making it ideal for small-molecule screening where thousands of cycles are run[cite: 1]. However, random coupling via surface lysines can heterogeneously orient the ligand or occlude its binding site[cite: 1]. Affinity capture (Protein A/G, SA, NTA) ensures uniform orientation and 100% homogeneous binding sites, which is strongly preferred when measuring high-precision kinetic rate constants[cite: 1].
+            </div>
+        </section>
+
+        <!-- CHAPTER 3 -->
+        <section id="ch3" class="chapter">
+            <span class="chapter-num">Chapter 03</span>
+            <h2 class="chapter-title">Assay Design & Immobilization Protocols</h2>
+            <p>High-quality kinetic data depends primarily on immobilizing the lowest possible amount of active, homogeneously oriented ligand that still yields an acceptable signal-to-noise ratio[cite: 1].</p>
+
+            <h3>3.1 Choosing Which Partner to Immobilize</h3>
+            <ul>
+                <li><strong>Valency Rule:</strong> Always immobilize the <strong>multivalent</strong> partner (e.g., bivalent IgG antibody, oligomeric receptor) on the chip surface and inject the <strong>monovalent</strong> partner in solution[cite: 1]. Injecting a bivalent analyte over an immobilized ligand induces avidity artifacts (artificial slowing of apparent <em>k<sub>d</sub></em>) that violate 1:1 Langmuir kinetics[cite: 1].</li>
+                <li><strong>Molecular Weight Rule:</strong> Because SPR signal scales with analyte mass, immobilizing the smaller partner and injecting the larger partner amplifies the binding response[cite: 1]. Conversely, when studying small molecules (&lt;500 Da), the macromolecular target must be immobilized at high density (typically 3,000–10,000 RU) to achieve measurable signals (10–40 RU)[cite: 1].</li>
+                <li><strong>Stability Rule:</strong> Immobilize the partner that best tolerates low-pH or high-salt regeneration cycles without losing conformational activity[cite: 1].</li>
+            </ul>
+
+            <h3>3.2 Calculating Theoretical R<sub>max</sub> and Target Immobilization</h3>
+            <p>Before running an experiment, calculate the theoretical maximum analyte binding capacity (<em>R<sub>max</sub></em>) expected when all immobilized ligand binding sites are saturated[cite: 1]:</p>
+
+            <div class="equation-box">
+                R<sub>max</sub> = (MW<sub>analyte</sub> / MW<sub>ligand</sub>) &times; R<sub>ligand</sub> &times; n
+                <span class="equation-caption">Equation 3.1: Theoretical R<sub>max</sub> (in RU), where MW<sub>analyte</sub> and MW<sub>ligand</sub> are molecular weights in Daltons, R<sub>ligand</sub> is the immobilized ligand level (RU), and n is the molar binding stoichiometry[cite: 1].</span>
+            </div>
+
+            <p>For clean 1:1 kinetic characterization of protein–protein interactions, aim for a <strong>target R<sub>max</sub> between 30 and 100 RU</strong>[cite: 1]. Excessive ligand density causes steric hindrance, analyte rebinding during dissociation, and mass transport limitation[cite: 1].</p>
+
+            <h3>3.3 Standard EDC/NHS Amine Coupling Protocol</h3>
+            <p>Amine coupling attaches primary amine groups (N-terminus and &epsilon;-amino groups of lysine residues) on the ligand to carboxymethyl groups on a CM-series sensor chip[cite: 1]:</p>
+            <ol>
+                <li><strong>Electrostatic Pre-Concentration (pH Scouting):</strong> Dilute the ligand (10–50 &mu;g/mL) into low-ionic-strength coupling buffers (e.g., 10 mM sodium acetate at pH 4.0, 4.5, 5.0, and 5.5)[cite: 1]. Inject over an unactivated surface[cite: 1]. Choose the highest pH that still yields strong electrostatic attraction to the negatively charged dextran matrix (pK<sub>a</sub> &approx; 3.5)[cite: 1]. Never include Tris, glycine, ammonium ions, or amine-containing stabilizers during coupling[cite: 1].</li>
+                <li><strong>Surface Activation:</strong> Inject a freshly mixed 1:1 solution of <strong>0.4 M EDC</strong> (1-ethyl-3-(3-dimethylaminopropyl)carbodiimide) and <strong>0.1 M NHS</strong> (N-hydroxysuccinimide) for 7 minutes at 10 &mu;L/min to convert carboxyl groups into reactive succinimide esters[cite: 1].</li>
+                <li><strong>Ligand Injection:</strong> Inject the ligand in the selected acetate buffer using short pulses or targeted RU control until the desired <em>R<sub>ligand</sub></em> is achieved[cite: 1].</li>
+                <li><strong>Deactivation / Blocking:</strong> Inject <strong>1.0 M ethanolamine-HCl (pH 8.5)</strong> for 7 minutes to cap unreacted NHS-esters and remove electrostatically bound (non-covalent) protein[cite: 1].</li>
+            </ol>
+
+            <div class="callout warning">
+                <strong class="callout-title">Handling Acidic Ligands (pI &lt; 4.5)</strong>
+                Proteins with an isoelectric point below 4.5 carry a net negative charge at pH 4.0 and are electrostatically repelled by carboxymethyl dextran, preventing pre-concentration[cite: 1]. Rather than lowering the pH below 3.5 (which protonates the dextran and risks acid denaturation), switch to <strong>thiol coupling (PDEA)</strong>, <strong>aldehyde coupling</strong> (for glycoproteins), or <strong>biotin-streptavidin capture</strong>[cite: 1].
+            </div>
+        </section>
+
+        <!-- CHAPTER 4 -->
+        <section id="ch4" class="chapter">
+            <span class="chapter-num">Chapter 04</span>
+            <h2 class="chapter-title">Binding Kinetics & Rate Constants</h2>
+            <p>The primary advantage of SPR over endpoint techniques (such as ELISA or ITC) is its ability to resolve the individual kinetic rate constants governing complex formation and breakdown in real time[cite: 1].</p>
+
+            <h3>4.1 The 1:1 Langmuir Interaction Model</h3>
+            <p>In the simplest bimolecular interaction, a soluble analyte (A) binds reversibly to an immobilized ligand (B) with 1:1 stoichiometry to form complex (AB)[cite: 1]:</p>
+            <p style="text-align:center; font-weight:bold;">A + B &rightleftharpoons; AB[cite: 1]</p>
+
+            <ul>
+                <li><strong>Association Rate Constant (k<sub>a</sub> or k<sub>on</sub>):</strong> Expressed in <strong>M<sup>-1</sup>s<sup>-1</sup></strong>[cite: 1]. Describes how rapidly the complex forms per unit concentration of analyte[cite: 1]. Typical macromolecular values span 10<sup>3</sup> to 10<sup>7</sup> M<sup>-1</sup>s<sup>-1</sup> (diffusion-limited ceiling is ~10<sup>8</sup>–10<sup>9</sup> M<sup>-1</sup>s<sup>-1</sup>)[cite: 1].</li>
+                <li><strong>Dissociation Rate Constant (k<sub>d</sub> or k<sub>off</sub>):</strong> Expressed in <strong>s<sup>-1</sup></strong>[cite: 1]. Describes the spontaneous decay probability of the complex per second and is independent of analyte concentration[cite: 1]. Typical values span 10<sup>-6</sup> to 10<sup>-1</sup> s<sup>-1</sup>[cite: 1].</li>
+                <li><strong>Equilibrium Dissociation Constant (K<sub>D</sub>):</strong> Expressed in Molar units (<strong>M</strong>, typically nM or &mu;M)[cite: 1]. Defined as the analyte concentration at which 50% of ligand sites are occupied at equilibrium[cite: 1].</li>
+            </ul>
+
+            <div class="equation-box">
+                dR/dt = k<sub>a</sub> &middot; C &middot; (R<sub>max</sub> - R) - k<sub>d</sub> &middot; R<br><br>
+                K<sub>D</sub> = k<sub>d</sub> / k<sub>a</sub> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; t<sub>1/2</sub> = ln(2) / k<sub>d</sub> &approx; 0.693 / k<sub>d</sub>
+                <span class="equation-caption">Equation 4.1: Differential rate equation for 1:1 Langmuir binding under continuous flow (where bulk analyte concentration C remains constant), equilibrium affinity K<sub>D</sub>, and dissociative complex half-life t<sub>1/2</sub>[cite: 1].</span>
+            </div>
+
+            <h3>4.2 Designing an Optimal Analyte Concentration Series</h3>
+            <p>To constrain both <em>k<sub>a</sub></em> and <em>k<sub>d</sub></em> during global curve fitting, inject at least <strong>5 to 6 serial dilutions</strong> (typically 2-fold or 3-fold dilutions) spanning <strong>0.1&times; K<sub>D</sub> to 10&times; K<sub>D</sub></strong>[cite: 1]:</p>
+            <ul>
+                <li>At concentrations well below <em>K<sub>D</sub></em>, curvature during association is governed primarily by <em>k<sub>d</sub></em>[cite: 1].</li>
+                <li>At concentrations well above <em>K<sub>D</sub></em>, the observed association rate (<em>k<sub>obs</sub> = k<sub>a</sub>C + k<sub>d</sub></em>) is dominated by <em>k<sub>a</sub>C</em>, approaching saturation (<em>R<sub>max</sub></em>)[cite: 1].</li>
+                <li><strong>Dissociation Phase Duration:</strong> Allow the buffer wash (dissociation phase) to run long enough to observe at least a <strong>5–10% drop in bound signal</strong>[cite: 1]. Very tight binders (<em>k<sub>d</sub></em> &lt; 10<sup>-4</sup> s<sup>-1</sup>) require 15–60 minutes of dissociation monitoring to accurately determine <em>k<sub>d</sub></em>[cite: 1].</li>
+            </ul>
+
+            <h3>4.3 Steady-State Affinity Analysis</h3>
+            <p>When association and dissociation are extremely rapid (<em>k<sub>a</sub></em> &gt; 10<sup>6</sup> M<sup>-1</sup>s<sup>-1</sup> and <em>k<sub>d</sub></em> &gt; 0.1 s<sup>-1</sup>, common in small-molecule or weak peptide interactions), sensorgrams reach a flat equilibrium plateau (<em>R<sub>eq</sub></em>) within seconds[cite: 1]. In this regime, kinetic rate constants cannot be resolved reliably, and <em>K<sub>D</sub></em> is determined by plotting plateau response (<em>R<sub>eq</sub></em>) versus analyte concentration (<em>C</em>) using the Langmuir isotherm[cite: 1]:</p>
+
+            <div class="equation-box">
+                R<sub>eq</sub> = (C &middot; R<sub>max</sub>) / (C + K<sub>D</sub>) + Offset
+                <span class="equation-caption">Equation 4.2: Steady-state equilibrium binding isotherm[cite: 1].</span>
+            </div>
+        </section>
+
+        <!-- CHAPTER 5 -->
+        <section id="ch5" class="chapter">
+            <span class="chapter-num">Chapter 05</span>
+            <h2 class="chapter-title">Complex Binding Models & Mechanisms</h2>
+            <p>While the 1:1 Langmuir model is the default benchmark, biological systems frequently exhibit mechanistic complexity[cite: 1]. Fitting complex data to a 1:1 model yields systematic residuals and inaccurate parameters[cite: 1].</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Reaction Scheme</th>
+                        <th>Physical / Biological Origin</th>
+                        <th>Diagnostic Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Two-State (Conformational Change)</strong></td>
+                        <td>A + B &rightleftharpoons; AB &rightleftharpoons; AB*[cite: 1]</td>
+                        <td>Initial encounter complex (AB) undergoes a slow structural isomerization into a stabilized state (AB*)[cite: 1].</td>
+                        <td><strong>Linked-reaction test:</strong> Apparent dissociation rate slows down as analyte injection contact time increases[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heterogeneous Ligand</strong></td>
+                        <td>A + B<sub>1</sub> &rightleftharpoons; AB<sub>1</sub><br>A + B<sub>2</sub> &rightleftharpoons; AB<sub>2</sub>[cite: 1]</td>
+                        <td>Two independent binding site populations on the chip (e.g., partial denaturation from random amine coupling)[cite: 1].</td>
+                        <td>Biphasic association and dissociation curves independent of injection duration; resolved by oriented capture[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bivalent Analyte</strong></td>
+                        <td>A + B &rightleftharpoons; AB<br>AB + B &rightleftharpoons; AB<sub>2</sub>[cite: 1]</td>
+                        <td>Soluble analyte possesses two identical binding sites (e.g., intact IgG injected over immobilized antigen)[cite: 1].</td>
+                        <td>Apparent <em>k<sub>d</sub></em> decreases at higher ligand immobilization densities due to cross-linking avidity[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mass Transport Limited (2-Compartment)</strong></td>
+                        <td>A<sub>bulk</sub> &rightleftharpoons; A<sub>surface</sub><br>A<sub>surface</sub> + B &rightleftharpoons; AB[cite: 1]</td>
+                        <td>Rate of binding exceeds the rate of analyte diffusion from bulk flow through the unstirred boundary layer[cite: 1].</td>
+                        <td>Linear initial association slope; apparent rates change when flow rate is varied between 10 and 100 &mu;L/min[cite: 1].</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout">
+                <strong class="callout-title">Principle of Parsimony in Model Selection</strong>
+                Complex mathematical models contain more adjustable floating parameters (4 to 6 rate constants instead of 2) and will almost always produce a lower mathematical &chi;<sup>2</sup> simply due to extra degrees of freedom[cite: 1]. Never adopt a two-state or heterogeneous model solely based on a slightly better curve fit; verify the mechanism experimentally using orthogonal tests (such as varying contact time, ligand density, or flow rate)[cite: 1].
+            </div>
+        </section>
+
+        <!-- CHAPTER 6 -->
+        <section id="ch6" class="chapter">
+            <span class="chapter-num">Chapter 06</span>
+            <h2 class="chapter-title">Thermodynamics via van 't Hoff Analysis</h2>
+            <p>By measuring the equilibrium dissociation constant (<em>K<sub>D</sub></em>) across a range of temperatures (typically 4–6 temperatures spanning 10&deg;C to 37&deg;C), SPR can dissect the enthalpic (&Delta;H&deg;) and entropic (&Delta;S&deg;) driving forces of an interaction without requiring milligram quantities of protein[cite: 1].</p>
+
+            <div class="equation-box">
+                &Delta;G&deg; = R &middot; T &middot; ln(K<sub>D</sub>) = &Delta;H&deg; - T &middot; &Delta;S&deg;<br><br>
+                ln(K<sub>D</sub>) = (&Delta;H&deg; / R) &middot; (1 / T) - (&Delta;S&deg; / R)
+                <span class="equation-caption">Equation 6.1: Gibbs free energy relationship and linear van 't Hoff equation, where R is the universal gas constant (8.314 J&middot;mol<sup>-1</sup>&middot;K<sup>-1</sup>) and T is absolute temperature in Kelvin[cite: 1].</span>
+            </div>
+
+            <ul>
+                <li><strong>Linear van 't Hoff Plot:</strong> Plotting <code>ln(K<sub>D</sub>)</code> against <code>1/T</code> yields a straight line with slope <code>&Delta;H&deg;/R</code> and y-intercept <code>-&Delta;S&deg;/R</code>, provided the heat capacity change (&Delta;C<sub>p</sub>) is negligible over the temperature range[cite: 1].</li>
+                <li><strong>Curved van 't Hoff Plot:</strong> Non-linear curvature indicates a significant heat capacity change (&Delta;C<sub>p</sub> &ne; 0), typically reflecting burial of hydrophobic surface area and water reorganization upon complex formation[cite: 1].</li>
+                <li><strong>Transition-State Thermodynamics:</strong> Applying the Eyring equation to temperature-dependent <em>k<sub>a</sub></em> and <em>k<sub>d</sub></em> values further resolves activation enthalpy (&Delta;H<sup>&ddagger;</sup>) and activation entropy (&Delta;S<sup>&ddagger;</sup>) barriers[cite: 1].</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 7 -->
+        <section id="ch7" class="chapter">
+            <span class="chapter-num">Chapter 07</span>
+            <h2 class="chapter-title">Small-Molecule & Fragment Screening</h2>
+            <p>Modern high-sensitivity SPR instruments routinely measure binding of low-molecular-weight compounds (100–500 Da) and fragment libraries to immobilized drug targets (30–150 kDa)[cite: 1].</p>
+
+            <h3>7.1 Special Considerations for Low-MW Analytes</h3>
+            <ul>
+                <li><strong>High Immobilization Density:</strong> Because <em>R<sub>max</sub></em> scales with <em>MW<sub>analyte</sub> / MW<sub>ligand</sub></em>, a 250 Da fragment binding 1:1 to a 50 kDa protein yields only 0.5% of the immobilized ligand RU[cite: 1]. Immobilize <strong>4,000–10,000 RU</strong> of target protein to obtain a theoretical <em>R<sub>max</sub></em> of 20–50 RU[cite: 1].</li>
+                <li><strong>DMSO Running Buffer & Excluded Volume Effect:</strong> Small molecules require 1–5% (v/v) DMSO for solubility[cite: 1]. Pure DMSO has a very high refractive index (~1.479 vs. ~1.333 for water), generating a massive bulk refractive index jump (~1,200 RU per 1% DMSO)[cite: 1]. Furthermore, immobilized protein on the active flow cell occupies physical volume that excludes bulk DMSO, creating a mismatch between active and reference channels (the <strong>excluded volume effect</strong>)[cite: 1].</li>
+                <li><strong>Solvent Correction Curve:</strong> Inject 6–8 DMSO calibration standards spanning &plusmn;0.5% around the nominal running buffer concentration (e.g., 1.5% to 2.5% DMSO for a 2.0% buffer) before and after compound injections to construct an empirical solvent correction curve[cite: 1].</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 8 -->
+        <section id="ch8" class="chapter">
+            <span class="chapter-num">Chapter 08</span>
+            <h2 class="chapter-title">Data Processing & Double Referencing</h2>
+            <p>Raw SPR sensorgrams contain systematic baseline drift, refractive index jumps, and injection valve transients[cite: 1]. <strong>Double referencing</strong> (introduced by David Myszka) is the mandatory mathematical workflow required prior to kinetic fitting[cite: 1]:</p>
+
+            <ol>
+                <li><strong>Y-Axis Baseline Alignment:</strong> Zero all sensorgrams to the average baseline signal immediately preceding sample injection (typically 10–20 seconds before <em>t = 0</em>)[cite: 1].</li>
+                <li><strong>X-Axis Injection Alignment:</strong> Align the exact start time of sample injection across all cycles and flow cells[cite: 1].</li>
+                <li><strong>Step 1 — Reference Surface Subtraction (Active &minus; Reference):</strong> Subtract the signal from an unmodified or irrelevant-protein reference flow cell (FC1) from the active ligand flow cell (FC2)[cite: 1]. This removes bulk refractive index shifts and non-specific binding to the dextran matrix[cite: 1].</li>
+                <li><strong>Step 2 — Blank Buffer Subtraction (Sample &minus; Buffer Blank):</strong> Subtract the average of multiple matched running-buffer blank injections from the reference-subtracted analyte curves[cite: 1]. This removes systematic flow-cell-specific artifacts, pressure spikes, and baseline drift[cite: 1].</li>
+                <li><strong>DMSO Solvent Correction (If Applicable):</strong> Apply the DMSO calibration curve to correct for excluded volume differences before blank subtraction[cite: 1].</li>
+            </ol>
+        </section>
+
+        <!-- CHAPTER 9 -->
+        <section id="ch9" class="chapter">
+            <span class="chapter-num">Chapter 09</span>
+            <h2 class="chapter-title">Experimental Artifacts & Troubleshooting</h2>
+            <p>Recognizing and eliminating physical artifacts distinguishes rigorous biophysical measurements from curve-fitting illusions[cite: 1].</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symptom / Artifact</th>
+                        <th>Root Cause</th>
+                        <th>Diagnostic Check & Corrective Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mass Transport Limitation (MTL)</strong></td>
+                        <td>High ligand density or ultra-fast <em>k<sub>a</sub></em> depletes analyte near the surface faster than laminar flow replenishes it[cite: 1].</td>
+                        <td><strong>Test:</strong> Inject a single concentration at 10, 30, and 100 &mu;L/min; if curves differ, MTL is present[cite: 1].<br><strong>Fix:</strong> Reduce ligand density (target <em>R<sub>max</sub></em> &lt; 50 RU) and run at &ge;30–50 &mu;L/min[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Non-Specific Electrostatic Binding</strong></td>
+                        <td>Positively charged analyte binds electrostatically to negatively charged carboxymethyl dextran[cite: 1].</td>
+                        <td><strong>Fix:</strong> Increase NaCl to 150–300 mM, add 0.005–0.05% surfactant (Tween-20 / P20), add 1 mg/mL soluble carboxymethyl dextran as a competitor, or switch to a low-charge CM4 chip[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carryover / Incomplete Regeneration</strong></td>
+                        <td>Baseline climbs steadily after each cycle; subsequent <em>R<sub>max</sub></em> decreases[cite: 1].</td>
+                        <td><strong>Fix:</strong> Scout mild-to-strong regeneration buffers (10 mM Glycine-HCl pH 1.5–3.0, 50 mM NaOH, 2–4 M MgCl<sub>2</sub>, or 0.5% SDS) using short 15–30 s pulses; verify repeatable blank and positive-control responses across &ge;10 cycles[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Experimental R<sub>max</sub> &lt;&lt; Theoretical R<sub>max</sub></strong></td>
+                        <td>Partial ligand inactivation during coupling, steric occlusion, or improper stoichiometry assumption[cite: 1].</td>
+                        <td><strong>Fix:</strong> Switch from random amine coupling to oriented affinity capture (SA, NTA, Protein A/G) or lower immobilization pH/contact time[cite: 1].</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sharp "Square-Wave" Jumps at Injection Start/End</strong></td>
+                        <td>Buffer composition mismatch (salt, glycerol, or DMSO) between sample and running buffer[cite: 1].</td>
+                        <td><strong>Fix:</strong> Dialyze or desalt protein analyte into the exact running buffer used by the instrument; never dilute stocks with water[cite: 1].</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CHAPTER 10 -->
+        <section id="ch10" class="chapter">
+            <span class="chapter-num">Chapter 10</span>
+            <h2 class="chapter-title">Publication Checklist (MIABE / QC Standards)</h2>
+            <p>To ensure reproducibility and meet peer-review standards (aligned with the <em>Minimum Information About a Bioactive Entity</em> and benchmark biosensor guidelines), every SPR dataset should verify and report the following items[cite: 1]:</p>
+            <ul>
+                <li><strong>Instrumentation & Sensor Chip:</strong> Exact instrument model, sensor chip chemistry (e.g., CM5, SA, NTA), and experimental temperature (e.g., 25.0&deg;C)[cite: 1].</li>
+                <li><strong>Buffer Formulation:</strong> Complete running buffer recipe including buffering agent, pH, ionic strength (NaCl), divalent cations (if required), surfactant (e.g., 0.05% Tween-20), and DMSO percentage[cite: 1].</li>
+                <li><strong>Immobilization Details:</strong> Coupling chemistry, flow rate, ligand concentration, and final immobilized ligand level (in RU) alongside reference flow cell preparation[cite: 1].</li>
+                <li><strong>Kinetic Assay Parameters:</strong> Flow rate (&ge;30 &mu;L/min for kinetics), association contact time, dissociation monitoring time, regeneration solution, and pulse duration[cite: 1].</li>
+                <li><strong>Concentration Range & Replicates:</strong> At least 5–6 concentrations spanning 0.1&times; to 10&times; <em>K<sub>D</sub></em>, including at least one duplicate concentration and multiple blank buffer injections[cite: 1].</li>
+                <li><strong>Sensorgram Overlays & Residuals:</strong> Display raw double-referenced sensorgrams overlaid with global fit curves (black lines) and residual plots, reporting <em>k<sub>a</sub></em>, <em>k<sub>d</sub></em>, <em>K<sub>D</sub></em>, experimental <em>R<sub>max</sub></em>, and standard errors from &ge;2–3 independent experiments[cite: 1].</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 11 -->
+        <section id="ch11" class="chapter">
+            <span class="chapter-num">Chapter 11</span>
+            <h2 class="chapter-title">Seminal Literature & Open-Source Software</h2>
+
+            <h3>11.1 Foundational Methodological Papers</h3>
+            <ul class="ref-list">
+                <li><strong>Myszka, D. G. (1999).</strong> <em>Improving biosensor analysis.</em> Journal of Molecular Recognition, 12(5), 279–284. — <a href="https://pubmed.ncbi.nlm.nih.gov/10551405/" target="_blank" rel="noopener">PubMed: 10551405</a> (Introduces double referencing, low-density immobilization, and mass transport diagnostics)[cite: 1].</li>
+                <li><strong>Schuck, P., &amp; Minton, A. P. (1996).</strong> <em>Analysis of mass transport-limited binding kinetics in evanescent wave biosensors.</em> Analytical Biochemistry, 240(2), 262–272. — <a href="https://pubmed.ncbi.nlm.nih.gov/8811920/" target="_blank" rel="noopener">PubMed: 8811920</a> (Mathematical derivation of the two-compartment mass transport model)[cite: 1].</li>
+                <li><strong>Frostell-Karlsson, &Aring;., et al. (2000).</strong> <em>Biosensor analysis of the interaction between immobilized human serum albumin and drug compounds for prediction of human serum albumin binding levels.</em> Journal of Medicinal Chemistry, 43(10), 1986–1992. — <a href="https://pubmed.ncbi.nlm.nih.gov/10821711/" target="_blank" rel="noopener">PubMed: 10821711</a> (Establishes the DMSO solvent correction procedure for small-molecule SPR)[cite: 1].</li>
+                <li><strong>Rich, R. L., &amp; Myszka, D. G. (2000–2011).</strong> <em>Survey of the year's commercial optical biosensor literature.</em> Journal of Molecular Recognition. (Annual critical reviews cataloguing common experimental pitfalls and best practices across thousands of published SPR studies)[cite: 1].</li>
+            </ul>
+
+            <h3>11.2 Open-Source & Academic Analysis Tools</h3>
+            <ul class="ref-list">
+                <li><strong>Anabel (Online Kinetic Analysis):</strong> Free, open-source browser-based curve-fitting suite for 1:1 Langmuir global fitting and <em>K<sub>D</sub></em> estimation. — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6377050/" target="_blank" rel="noopener">PMC6377050</a>[cite: 1]</li>
+                <li><strong>Evilfit / SEDFIT (NIH):</strong> Advanced 2D affinity and rate-constant distribution analysis for resolving surface-induced heterogeneity and multi-site binding. — <a href="https://sedfitsedphat.nibib.nih.gov/software/default.aspx" target="_blank" rel="noopener">NIH SEDFIT Portal</a>[cite: 1]</li>
+                <li><strong>Cytiva Biacore SPR Knowledge Center:</strong> Comprehensive application notes, sensor chip selection guides, and kinetic evaluation tutorials. — <a href="https://www.cytivalifesciences.com/en/us/solutions/protein-research/knowledge-center/surface-plasmon-resonance" target="_blank" rel="noopener">Cytiva SPR Resource</a>[cite: 1]</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 12 -->
+        <section id="ch12" class="chapter">
+            <span class="chapter-num">Chapter 12</span>
+            <h2 class="chapter-title">Single-Cycle Kinetics (SCK)</h2>
+            <p>Traditional multi-cycle kinetic assays require separate analyte injections interspersed with regeneration pulses to strip bound analyte after each cycle. For fragile targets or proteins that lose activity upon repeated regeneration, <strong>Single-Cycle Kinetics (SCK)</strong> provides a powerful alternative.</p>
+
+            <h3>12.1 Principles of Single-Cycle Kinetics</h3>
+            <p>In SCK, a series of increasing analyte concentrations are injected sequentially over the same immobilized ligand surface in a single continuous run without intermediate regeneration. Regeneration is performed only once at the very end of the concentration series.</p>
+            <ul>
+                <li><strong>Cumulative Dissociation:</strong> Because dissociation is only monitored fully after the final highest concentration, mathematical fitting algorithms must account for cumulative residual binding from preceding injections.</li>
+                <li><strong>Time Efficiency:</strong> SCK reduces total assay run time by up to 70%, making it ideal for high-throughput screening campaigns and unstable clinical samples.</li>
+                <li><strong>Surface Preservation:</strong> Minimizing exposure to harsh regeneration chemicals (e.g., low-pH glycine or high-molarity salts) preserves the active fraction of the immobilized ligand across multiple test compounds.</li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 13 -->
+        <section id="ch13" class="chapter">
+            <span class="chapter-num">Chapter 13</span>
+            <h2 class="chapter-title">Advanced Optical Configurations & LSPR</h2>
+            <p>While traditional Kretschmann prism-based SPR remains the gold standard for affinity and kinetic analysis, alternative optical architectures expand biosensing capabilities into specialized analytical realms.</p>
+
+            <h3>13.1 Localized Surface Plasmon Resonance (LSPR)</h3>
+            <p>Unlike continuous thin gold films, <strong>Localized Surface Plasmon Resonance (LSPR)</strong> utilizes noble metal nanoparticles (gold or silver nanospheres, nanorods, or nanoshells). When illuminated by resonant light, conduction electrons undergo collective localized oscillations.</p>
+            <ul>
+                <li><strong>Short Decay Length:</strong> The evanescent electromagnetic field decay length in LSPR is significantly shorter (~5–10 nm) than in conventional SPR (~200 nm), rendering LSPR exceptionally sensitive to molecular binding events immediately adjacent to the nanoparticle surface while suppressing bulk refractive index interference.</li>
+                <li><strong>Miniaturization & Fiber Optics:</strong> LSPR enables fiber-optic probes and microfluidic-free colorimetric biosensing platforms.</li>
+            </ul>
+
+            <h3>13.2 Multi-Parametric Surface Plasmon Resonance (MP-SPR) & Grating Coupling</h3>
+            <ul>
+                <li><strong>MP-SPR:</strong> Employs multi-wavelength or full angular spectral scans to acquire data across a wider optical range. This allows simultaneous determination of both layer thickness (<em>d</em>) and absolute refractive index (<em>n</em>), enabling precise quantification of conformational changes, swelling in hydrogel matrices, and lipid bilayer incorporation.</li>
+                <li><strong>Grating-Coupled SPR:</strong> Replaces the bulky high-refractive-index glass prism with a diffraction grating patterned directly onto the metal surface, satisfying momentum matching through grating diffraction orders to enable compact chip-based sensor arrays.</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
 
   
     </div>
